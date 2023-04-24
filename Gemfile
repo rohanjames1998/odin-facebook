@@ -57,6 +57,9 @@ group :development, :test do
   gem "factory_bot"
 end
 
+group :test do
+  gem "database_cleaner"
+end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
