@@ -7,10 +7,9 @@ RSpec.describe "Friend Request", type: :feature do
 
   context "After sending a friend request" do
     it "shows tells user that it was successful" do
-      login_as(first_user)
+      login(first_user)
 
-      click_on "Find Friends"
-      click_button "Add Friend"
+      send_friend_request
 
       expect(page).to have_content "Sent Successfully!"
     end
@@ -18,13 +17,12 @@ RSpec.describe "Friend Request", type: :feature do
 
   context "When someone sends a friend request" do
     xit "shows user option to accept and decline the request" do
-      login_as(first_user)
+      login(first_user)
 
-      click_on "Find Friends"
-      click_button "Add Friend"
+      send_friend_request
       click_on "Log Out"
 
-      login_as(second_user)
+      login(second_user)
 
       expect(page).to have_button "Accept"
       expect(page).to have_button "Decline"
@@ -38,12 +36,12 @@ RSpec.describe "Friend Request", type: :feature do
       first_user_profile_link = user_path(first_user)
       second_user_profile_link = user_path(second_user)
 
-      login_as(first_user)
+      login(first_user)
 
       send_friend_request
       click_on "Log Out"
 
-      login_as(second_user)
+      login(second_user)
 
       click_on "My Friends"
 
@@ -51,11 +49,22 @@ RSpec.describe "Friend Request", type: :feature do
 
       click_on "Log Out"
 
-      login_as(first_user)
+      login(first_user)
 
       click_on "My Friends"
 
       expect(page).to have_link second_user_name, href: second_user_profile_link
     end
+  end
+
+  def login(user)
+    # This method logs in as given user and goes to home page.
+    login_as(user)
+    visit root_path
+  end
+
+  def send_friend_request
+    click_on "Find Friends"
+    click_button "Add Friend"
   end
 end
