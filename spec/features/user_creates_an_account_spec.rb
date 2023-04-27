@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe "Sign Up", type: :feature do
 
     let(:user)  { FactoryBot.build(:user) }

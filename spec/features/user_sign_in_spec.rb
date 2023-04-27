@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe "Sign In", type: :feature do
 
   context "When user signs in with an existent account" do
