@@ -1,0 +1,8 @@
+<% @users.each do |user| %>
+  <% if user != current_user %>
+    <div>
+    <p><%= user.first_name %> <%= user.last_name %></p>
+    <%= button_tag "Add Friend", type: 'button' %>
+    </div>
+  <% end %>
+<% end %>
