@@ -55,13 +55,13 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "rspec-rails"
   gem "factory_bot"
+  gem "faker"
 end
 
 group :test do
   gem "database_cleaner"
   gem "shoulda-matchers"
   gem "capybara"
-  gem "faker"
 end
 
 group :development do
