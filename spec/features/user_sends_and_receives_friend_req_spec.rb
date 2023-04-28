@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Friend Request", type: :feature do
-
-  let(:first_user) { FactoryBot.create(:user) }
-  let(:second_user) { FactoryBot.create(:user) }
+  # Not using let(:user) because it is lazy loaded and we need to persist some users to our test
+  # database in order to assert that friend requests are sent and received
+  first_user =  FactoryBot.create(:user)
+  second_user =  FactoryBot.create(:user)
 
   context "After sending a friend request" do
     it "shows tells user that it was successful" do
+
       login(first_user)
 
       send_friend_request
@@ -60,7 +62,7 @@ RSpec.describe "Friend Request", type: :feature do
   def login(user)
     # This method logs in as given user and goes to home page.
     login_as(user)
-    visit root_path
+    visit user_home_path(user)
   end
 
   def send_friend_request
