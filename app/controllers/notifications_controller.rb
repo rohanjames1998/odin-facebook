@@ -4,7 +4,8 @@ class NotificationsController < ApplicationController
     user = User.find(params[:notification][:receiver_id])
     notification = user.notifications.build(notification_params)
     notification.save!
-    render "users/home", flash.now[:alert]= "Sent Succesfully"
+    flash.now[:alert] = "Sent Successfully!"
+    render "users/home", status: :ok
   end
 
   private
