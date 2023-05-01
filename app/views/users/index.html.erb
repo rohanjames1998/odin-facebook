@@ -1,8 +1,8 @@
 <% @users.each do |user| %>
-  <% if user != current_user %>
-    <div>
-    <p><%= user.first_name %> <%= user.last_name %></p>
-    <%= button_tag "Add Friend", type: 'button' %>
-    </div>
-  <% end %>
+    <% if user != current_user %>
+      <div>
+      <p><%= user.first_name %> <%= user.last_name %></p>
+      <%= button_to "Add Friend", notifications_path(type: "friend_req", receiver_id: user.id, sender_id: current_user.id)%>
+      </div>
+    <% end %>
 <% end %>
