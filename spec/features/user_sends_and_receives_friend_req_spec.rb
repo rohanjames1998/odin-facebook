@@ -61,7 +61,7 @@ RSpec.describe "Friend Request", type: :feature do
 
   def login(user)
     # This method logs in as given user and goes to home page.
-    login_as(user)
+    sign_in user
     visit user_home_path(user)
   end
 
