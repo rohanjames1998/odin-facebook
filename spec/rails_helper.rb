@@ -32,6 +32,7 @@ DatabaseCleaner.strategy = :truncation
 
 
 
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
@@ -78,7 +79,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.include Warden::Test::Helpers
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
 
 DatabaseCleaner.clean
