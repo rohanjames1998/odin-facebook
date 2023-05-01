@@ -2,7 +2,7 @@
     <% if user != current_user %>
       <div>
       <p><%= user.first_name %> <%= user.last_name %></p>
-      <%= button_to "Add Friend", notifications_path(notification: { type: "friend_req", receiver_id: user.id, sender_id: current_user.id } )%>
+      <%= button_to "Add Friend", notifications_path(notification: { kind: "friend_req", receiver_id: user.id, sender_id: current_user.id } )%>
       </div>
     <% end %>
 <% end %>
