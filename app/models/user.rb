@@ -9,6 +9,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }
 
   has_many :notifications, foreign_key: :receiver_id, class_name: "Notification"
-  has_many :send_notifications, foreign_key: :sender_id, class_name: "Notification"
+  has_many :sent_notifications, foreign_key: :sender_id, class_name: "Notification"
 
 end
