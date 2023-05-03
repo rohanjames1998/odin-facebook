@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   get "home/:user_id", to: "users#home", as: :user_home
 
   resources :users, only: [ :index ]
-  resources :notifications, only: [ :create ]
+  resources :friendships, only: [ :create ]
 end
