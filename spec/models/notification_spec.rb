@@ -6,4 +6,11 @@ RSpec.describe Notification, type: :model do
     it { should belong_to(:sender) }
     it { should belong_to(:notifiable) }
   end
+
+  describe "validations" do
+    it { should validate_presence_of(:receiver_id) }
+    it { should validate_presence_of(:sender_id) }
+    it { should validate_presence_of(:notifiable_id) }
+    it { should validate_presence_of(:notifiable_type) }
+  end
 end
