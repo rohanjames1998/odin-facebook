@@ -4,8 +4,7 @@ class FriendshipsController < ApplicationController
     friendship = Friendship.new(friendship_params)
     friendship.notifications.build(params[:friendship][:notifications_attributes])
     friendship.save
-    flash.now[:alert] = "Sent Successfully!"
-    render "users/index", status: :ok
+    redirect_to users_path
   end
 
   private
