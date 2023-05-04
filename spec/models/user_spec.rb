@@ -13,5 +13,7 @@ RSpec.describe User, type: :model do
   describe "associations" do
     it { should have_many(:notifications) }
     it { should have_many(:sent_notifications) }
+    it { should have_many(:friend_requests) }
+    it { should have_many(:friend_requests_sent) }
   end
 end
