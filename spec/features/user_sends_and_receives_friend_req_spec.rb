@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "Friend Request", type: :feature do
   # Not using let(:user) because it is lazy loaded and we need to persist some users to our test
   # database in order to assert that friend requests are sent and received
-  context "after clicking add friend button" do
-    it "it changes to cancel request button" do
+  context "After clicking add friend button" do
+    it "changes to cancel request button" do
       first_user =  FactoryBot.create(:user)
       second_user =  FactoryBot.create(:user)
 
@@ -15,6 +15,21 @@ RSpec.describe "Friend Request", type: :feature do
       expect(page).to have_button "Cancel Request"
     end
   end
+
+  context "If user wants to cancel request they sent using cancel request button" do
+    it "deletes the friend request" do
+      first_user =  FactoryBot.create(:user)
+      second_user =  FactoryBot.create(:user)
+
+      login(first_user)
+
+      send_friend_request
+      click_button "Cancel Request"
+
+      expect(second_user.friend_requests).to be_empty
+    end
+  end
+
 
   context "When someone sends a friend request" do
     xit "shows user option to accept and decline the request" do
