@@ -3,7 +3,7 @@ class Friendship < ApplicationRecord
   validates :request_sender_id, presence: true
   enum :status, %i(pending accepted)
 
-  has_many :notifications, as: :notifiable
+  has_many :notifications, as: :notifiable, dependent: :delete_all
   belongs_to :requested_user, class_name: "User"
   belongs_to :request_sender, class_name: "User"
 

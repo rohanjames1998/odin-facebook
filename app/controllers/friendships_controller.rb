@@ -1,10 +1,15 @@
 class FriendshipsController < ApplicationController
 
   def create
-    friendship = Friendship.new(friendship_params)
-    friendship.notifications.build(params[:friendship][:notifications_attributes])
-    friendship.save
+    @friendship = Friendship.create(friendship_params)
+    notification = @friendship.notifications.build
+    @friendship.save
     redirect_to users_path
+  end
+
+  def destroy
+    friendship = Friendship.find_by(request_sender_id: params[:request_sender_id], requested_user_id: params[:requested_user_id])
+    friendship.destroy
   end
 
   private
