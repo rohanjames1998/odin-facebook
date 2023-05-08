@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root "users#root"
 
   get "home/:user_id", to: "users#home", as: :user_home
-
+  get "friends", to: "users#friends", as: :user_friends
   resources :users, only: [ :index ]
   resources :friendships, only: [ :create ]
 

@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def home
-    # p params
     @user = User.find(params[:user_id])
   end
 
@@ -14,5 +13,9 @@ class UsersController < ApplicationController
     else
       redirect_to new_user_session_path
     end
+  end
+
+  def friends
+    @friends = current_user.friends
   end
 end

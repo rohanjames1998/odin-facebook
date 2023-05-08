@@ -1,6 +1,7 @@
 <main>
   <h1>Home</h1>
   <%= link_to "Find Friends", users_path %>
+  <%= link_to "My Friends", user_friends_path %>
 
   <div>
   <% if current_user.notifications.any? %>
