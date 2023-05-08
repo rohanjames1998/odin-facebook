@@ -16,4 +16,16 @@ RSpec.describe User, type: :model do
     it { should have_many(:friend_requests) }
     it { should have_many(:friend_requests_sent) }
   end
+
+  describe "#name" do
+    context "When called" do
+      it "returns the full name of the user" do
+        user = FactoryBot.create(:user)
+        full_name = user.name
+        expect(full_name).to include user.first_name
+        expect(full_name).to include user.last_name
+      end
+    end
+  end
+
 end
