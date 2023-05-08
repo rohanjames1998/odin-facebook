@@ -15,6 +15,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:sent_notifications) }
     it { should have_many(:friend_requests) }
     it { should have_many(:friend_requests_sent) }
+    it { should have_many(:friends_i_added) }
+    it { should have_many(:friends_that_added_me) }
   end
 
   describe "#name" do
@@ -27,5 +29,12 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  # describe "#friends" do
+  #   context "When called" do
+  #     xit "returns all of the user's friends" do
+
+  #   end
+  # end
 
 end
