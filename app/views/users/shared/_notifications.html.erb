@@ -1,0 +1,9 @@
+<h2>Notifications</h2>
+  <% current_user.notifications.each do |notification| %>
+    <% if notification.notifiable_type == "Friendship" %>
+      <p>Friend Request From <%= notification.sender.name %></p>
+      <%= button_to "Accept", {} %>
+      <%= button_to "Decline", {} %>
+    <% end %>
+  <% end %>
+

@@ -31,8 +31,8 @@ RSpec.describe "Friend Request", type: :feature do
   end
 
 
-  context "When someone sends a friend request" do
-    xit "shows user option to accept and decline the request" do
+  context "When someone receives a friend request" do
+    it "shows user option to accept and decline the request" do
       first_user =  FactoryBot.create(:user)
       second_user =  FactoryBot.create(:user)
 

@@ -1,2 +1,10 @@
-<h1>Home</h1>
-<%= link_to "Find Friends", users_path %>
+<main>
+  <h1>Home</h1>
+  <%= link_to "Find Friends", users_path %>
+
+  <div>
+  <% if current_user.notifications.any? %>
+    <%= render "users/shared/notifications" %>
+  <% end %>
+  </div>
+</main>
