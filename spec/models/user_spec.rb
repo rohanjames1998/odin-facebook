@@ -30,11 +30,21 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # describe "#friends" do
-  #   context "When called" do
-  #     xit "returns all of the user's friends" do
+  describe "#friends" do
+    context "When called" do
+      it "returns all of the user's friends" do
+        first_user = FactoryBot.create(:user)
+        second_user = FactoryBot.create(:user)
+        third_user = FactoryBot.create(:user)
 
-  #   end
-  # end
+        Friendship.create(requested_user_id: second_user.id, request_sender_id: first_user.id, status: :accepted)
+        Friendship.create(requested_user_id: first_user.id, request_sender_id: third_user.id, status: :accepted)
+
+        friends = first_user.friends
+
+        expect(friends).to include second_user, third_user
+      end
+    end
+  end
 
 end

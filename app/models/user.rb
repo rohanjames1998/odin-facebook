@@ -20,4 +20,13 @@ class User < ApplicationRecord
     first_name + last_name
   end
 
+  def friends
+    ids_of_friends_i_added = friends_i_added.map { |frndship| frndship.requested_user_id }
+    ids_of_friends_that_added_me = friends_that_added_me.map { |frndship| frndship.request_sender_id }
+
+    all_friends_ids = ids_of_friends_i_added + ids_of_friends_that_added_me
+
+    User.find(all_friends_ids)
+  end
+
 end
