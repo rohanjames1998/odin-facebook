@@ -4,7 +4,6 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.create(friendship_params)
     notification = @friendship.notifications.build
     @friendship.save
-    redirect_to users_path
   end
 
   def destroy
