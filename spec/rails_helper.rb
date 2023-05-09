@@ -78,6 +78,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
 
 Shoulda::Matchers.configure do |config|
@@ -87,7 +88,16 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-RSpec.configure do |config|
-  config.include Devise::Test::IntegrationHelpers, type: :feature
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(
+    args: %w[no-sandbox headless disable-gpu window-size=1920,1080]
+  )
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    options: options
+  )
 end
+
 
