@@ -49,13 +49,13 @@ RSpec.describe "Friend Request", type: :feature do
   end
 
   context "When user accepts the friend request" do
-    xit "adds both user in their friends list" do
+    it "adds both user in their friends list" do
       first_user =  FactoryBot.create(:user)
       second_user =  FactoryBot.create(:user)
       first_user_name = "#{first_user.first_name} #{first_user.last_name}"
       second_user_name = "#{second_user.first_name} #{second_user.last_name}"
-      first_user_profile_link = user_path(first_user)
-      second_user_profile_link = user_path(second_user)
+      first_user_profile_link = users_path(first_user)
+      second_user_profile_link = users_path(second_user)
 
       login(first_user)
 
