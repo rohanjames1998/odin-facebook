@@ -56,6 +56,8 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot"
   gem "faker"
+  gem "bullet"
+
 end
 
 group :test do
@@ -74,7 +76,6 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  gem "bullet"
 end
 
 
