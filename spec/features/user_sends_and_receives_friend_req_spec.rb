@@ -87,5 +87,6 @@ RSpec.describe "Friend Request", type: :feature do
   def send_friend_request
     click_on "Find Friends"
     click_button "Add Friend"
+    visit users_path
   end
 end
