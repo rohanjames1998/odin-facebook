@@ -67,6 +67,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver", '!= 4.9.1'
   gem "webdrivers"
+  gem 'capybara_watcher'
 end
 
 group :development do
