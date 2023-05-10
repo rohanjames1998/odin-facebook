@@ -79,6 +79,8 @@ RSpec.configure do |config|
   end
 
   config.include Devise::Test::IntegrationHelpers, type: :feature
+
+  config.include FriendReqHelpers, type: :feature
 end
 
 Shoulda::Matchers.configure do |config|
