@@ -28,7 +28,7 @@ RSpec.describe "Sending friend request", type: :feature, js: true do
 
       send_friend_request
       click_button "Cancel Request"
-      sleep 0.01
+      wait_for_changes
 
       expect(second_user.friend_requests).to be_empty
     end
