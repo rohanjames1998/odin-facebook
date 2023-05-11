@@ -2,7 +2,7 @@ class FriendshipsController < ApplicationController
 
   def create
     @friendship = Friendship.create(friendship_params)
-    notification = @friendship.notifications.build
+    @friendship.notifications.build
     @friendship.save
   end
 
@@ -13,7 +13,12 @@ class FriendshipsController < ApplicationController
 
   def update
     friendship = Friendship.find(params[:id])
-    friendship.update(status: params[:status] )
+
+    if params[:status] == "accepted"
+      friendship.notifications.build(sender_id: params[:sender_id], receiver_id: params[:receiver_id])
+    end
+
+    friendship.update!(status: params[:status])
   end
 
   private

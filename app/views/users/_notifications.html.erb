@@ -1,0 +1,14 @@
+<h2>Notifications</h2>
+  <% current_user.notifications.preload(:sender, :notifiable).each do |notification| %>
+    <% case notification.notifiable_type %>
+    <% when "Friendship" %>
+      <% if notification.notifiable.status == "pending" %>
+        <p>Friend Request From <%= notification.sender.name %></p>
+        <%= button_to "Accept", friendship_path({ id: notification.notifiable_id, status: "accepted", sender_id: current_user.id, receiver_id: notification.sender.id}), method: :patch %>
+        <%= button_to "Decline", cancel_request_path( requested_user_id: current_user.id, request_sender_id: notification.sender_id ), method: :delete %>
+      <% else %>
+        <p><%= notification.sender.name %> has accepted your friend request! </p>
+      <% end %>
+    <% end %>
+  <% end %>
+

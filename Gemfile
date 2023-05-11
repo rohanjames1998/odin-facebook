@@ -65,9 +65,10 @@ group :test do
   gem "database_cleaner"
   gem "shoulda-matchers"
   gem "capybara"
-  gem "selenium-webdriver", '!= 4.9.1'
+  gem "selenium-webdriver", "!= 4.9.1"
   gem "webdrivers"
-  gem 'capybara_watcher'
+  gem "capybara_watcher"
+  gem "db-query-matchers"
 end
 
 group :development do

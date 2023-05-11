@@ -1,9 +1,0 @@
-<h2>Notifications</h2>
-  <% current_user.notifications.includes(:sender).each do |notification| %>
-    <% if notification.notifiable_type == "Friendship" %>
-      <p>Friend Request From <%= notification.sender.name %></p>
-      <%= button_to "Accept", friendship_path({id: notification.notifiable_id, status: "accepted"}), method: :patch %>
-      <%= button_to "Decline", cancel_request_path( requested_user_id: current_user.id, request_sender_id: notification.sender_id ), method: :delete %>
-    <% end %>
-  <% end %>
-

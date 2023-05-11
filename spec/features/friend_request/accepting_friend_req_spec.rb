@@ -37,5 +37,28 @@ RSpec.describe "Accepting friend request", type: :feature, js: true do
 
       expect(page).to have_link second_user_name, href: user_path(second_user)
     end
+
+    it "notifies the request sender" do
+      first_user =  FactoryBot.create(:user)
+      second_user =  FactoryBot.create(:user)
+
+      login(first_user)
+
+      send_friend_request
+      click_on "Log Out"
+
+      wait_for_changes
+
+      login(second_user)
+
+      click_button "Accept"
+      click_on "Log Out"
+
+      wait_for_changes
+
+      login(first_user)
+
+      expect(page).to have_content "#{second_user.name} has accepted your friend request!"
+    end
   end
 end
