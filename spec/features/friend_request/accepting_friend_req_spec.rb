@@ -22,9 +22,10 @@ RSpec.describe "Accepting friend request", type: :feature, js: true do
 
       login(second_user)
 
+      click_button "Accept"
       click_on "My Friends"
 
-      expect(page).to have_link first_user_name, href: first_user_profile_link
+      expect(page).to have_link first_user_name, href: user_path(first_user)
 
       click_on "Log Out"
 
@@ -34,7 +35,7 @@ RSpec.describe "Accepting friend request", type: :feature, js: true do
 
       click_on "My Friends"
 
-      expect(page).to have_link second_user_name, href: second_user_profile_link
+      expect(page).to have_link second_user_name, href: user_path(second_user)
     end
   end
 end
