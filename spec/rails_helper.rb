@@ -82,6 +82,8 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :feature
 
   config.include FriendReqHelpers, type: :feature
+
+  config.include CapybaraWatcher, type: :feature
 end
 
 Shoulda::Matchers.configure do |config|
@@ -90,6 +92,8 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+
 
 Capybara.register_driver :selenium_chrome_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new(
