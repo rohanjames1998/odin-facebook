@@ -11,6 +11,11 @@ class FriendshipsController < ApplicationController
     friendship.destroy
   end
 
+  def update
+    friendship = Friendship.find(params[:id])
+    friendship.update(status: params[:status] )
+  end
+
   private
   def friendship_params
     params.require(:friendship).permit(:requested_user_id, :request_sender_id, notifications_attributes: [:receiver_id, :sender_id])

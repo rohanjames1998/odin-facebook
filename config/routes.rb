@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "home/:user_id", to: "users#home", as: :user_home
   get "friends", to: "users#friends", as: :user_friends
   resources :users, only: [ :index ]
-  resources :friendships, only: [ :create ]
+  resources :friendships, only: [ :create, :update ]
 
   delete 'friendship/:requested_user_id/request_sender_id', to: 'friendships#destroy', as: :cancel_request
 end
