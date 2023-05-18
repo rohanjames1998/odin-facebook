@@ -1,8 +1,12 @@
 class PostsController < ApplicationController
 
   def create
-    post = current_user.posts.build(post_params)
-    post.save!
+    @post = current_user.posts.build(post_params)
+    respond_to do |format|
+      if @post.save
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend('posts', @post)}
+      end
+    end
   end
 
   private

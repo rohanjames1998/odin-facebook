@@ -10,9 +10,12 @@
   </div>
 
   <div>
-  <%= form_with url: posts_path, method: :post do |f| %>
+  <%= form_with scope: :post, url: posts_path, method: :post do |f| %>
     <%= f.text_area :text_content %>
     <%= f.submit "Post" %>
   <% end %>
+  </div>
+  <div id="posts">
+    <%= render "posts/relevant_posts" %>
   </div>
 </main>
