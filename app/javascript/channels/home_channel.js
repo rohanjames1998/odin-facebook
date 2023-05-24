@@ -11,12 +11,12 @@ consumer.subscriptions.create( { channel:"HomeChannel", room: getCookie("user_id
 
   received(data) {
     const postDisplay = document.querySelector("#posts")
-    postDisplay.insertAdjacentHTML("beforebegin", this.template(data));
+    postDisplay.insertAdjacentHTML("afterbegin", this.template(data));
   },
 
   template(data) {
     return `<div>
-              <p>${data.user.first_name}<p>
+              <p>${data.user.first_name }<p>
             </div>
             <div>
             <p>${data.text_content}<p>
