@@ -1,10 +1,10 @@
 class Post < ApplicationRecord
   belongs_to :user
-  enum :attachments, %i(not_present present)
+  enum :attachments, %i(unavailable available)
 
   validates :text_content, presence: true, if: :attachments_present?
 
   def attachments_present?
-    present?
+    available?
   end
 end
