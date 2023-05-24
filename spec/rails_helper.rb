@@ -84,6 +84,8 @@ RSpec.configure do |config|
   config.include FriendReqHelpers, type: :feature
 
   config.include CapybaraWatcher, type: :feature
+
+  config.include ActionCable::TestHelper
 end
 
 Shoulda::Matchers.configure do |config|
