@@ -13,7 +13,6 @@ RSpec.describe "Creating a simple text post", type: :feature, js: true do
 
       fill_in "post_text_content", with: quote
       click_button "Post"
-      wait_for_changes
 
       expect(page).to have_content(quote)
     end
@@ -35,12 +34,13 @@ RSpec.describe "Creating a simple text post", type: :feature, js: true do
 
     it "does not show up on homepage of users who are not poster's friend" do
       random_user = FactoryBot.create(:user)
-      login(user)
-
-      fill_in "post_text_content", with: quote
-      click_button "Post"
-
-      assert_no_broadcasts("home_#{random_user.id}")
+      login(random_user)
+      using_session("user") do
+        login(user)
+        fill_in "post_text_content", with: quote
+        click_button "Post"
+      end
+      expect(page).not_to have_content(quote)
     end
   end
 end
