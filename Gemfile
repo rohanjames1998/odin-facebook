@@ -68,7 +68,6 @@ group :test do
   gem "selenium-webdriver", "!= 4.9.1"
   gem "webdrivers"
   gem "capybara_watcher"
-  gem "db-query-matchers"
 end
 
 group :development do
