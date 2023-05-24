@@ -13,23 +13,24 @@ RSpec.describe "Creating a simple text post", type: :feature, js: true do
 
       fill_in "post_text_content", with: quote
       click_button "Post"
+      wait_for_changes
 
       expect(page).to have_content(quote)
     end
 
     it "shows on the homepage of their friends" do
-      friend_one = FactoryBot.create(:user)
-      friend_two = FactoryBot.create(:user)
-      FactoryBot.create(:friendship, request_sender_id: user.id, requested_user_id: friend_one.id)
-      FactoryBot.create(:friendship, request_sender_id: friend_two.id, requested_user_id: user.id)
+      friend = FactoryBot.create(:user)
+      FactoryBot.create(:friendship, request_sender_id: user.id, requested_user_id: friend.id, status: "accepted")
 
-      login(user)
+      login(friend)
 
-      fill_in "post_text_content", with: quote
-      click_button "Post"
+      using_session("user") do
+        login(user)
+        fill_in "post_text_content", with: quote
+        click_button "Post"
+      end
 
-      assert_broadcast_on("home_#{friend_one.id}", quote)
-      assert_broadcast_on("home_#{friend_two.id}", quote)
+      expect(page).to have_content(quote)
     end
 
     it "does not show up on homepage of users who are not poster's friend" do
