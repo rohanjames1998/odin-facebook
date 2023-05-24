@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   describe "validations" do
-    it { should define_enum_for(:attachments).with_values [:not_present, :present] }
+    it { should define_enum_for(:attachments).with_values [:unavailable, :available] }
     describe "text_content" do
       context "When attachments are available" do
         before do
