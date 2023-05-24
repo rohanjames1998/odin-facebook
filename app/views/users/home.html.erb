@@ -10,7 +10,7 @@
   </div>
 
   <div>
-  <%= form_with scope: :post, url: posts_path, method: :post do |f| %>
+  <%= form_with scope: :post, url: posts_path, method: :post, id: "post_form" do |f| %>
     <%= f.text_area :text_content %>
     <%= f.submit "Post" %>
   <% end %>
