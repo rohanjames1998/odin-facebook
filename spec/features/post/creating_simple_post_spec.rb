@@ -19,7 +19,7 @@ RSpec.describe "Creating a simple text post", type: :feature, js: true do
 
     it "shows on the homepage of their friends" do
       friend = FactoryBot.create(:user)
-      FactoryBot.create(:friendship, request_sender_id: user.id, requested_user_id: friend.id, status: "accepted")
+      FactoryBot.create(:friendship, request_sender_id: user.id, requested_user_id: friend.id)
 
       login(friend)
 
