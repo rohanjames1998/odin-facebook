@@ -7,4 +7,10 @@ class Post < ApplicationRecord
   def attachments_present?
     available?
   end
+
+  def self.relevant_posts(user)
+    user.friends.map do |friend|
+      Post.find_by("user_id = ?", friend.id)
+    end
+  end
 end

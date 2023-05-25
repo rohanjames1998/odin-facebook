@@ -22,4 +22,24 @@ RSpec.describe Post, type: :model do
   describe "associations" do
     it { should belong_to(:user) }
   end
+
+  describe ".relevant_posts" do
+    let (:user) { FactoryBot.create(:user) }
+    let (:friend) { FactoryBot.create(:user) }
+    let (:friend2) { FactoryBot.create(:user) }
+
+
+    before do
+      allow(user).to receive(:friends).and_return([friend, friend2])
+    end
+
+    context "When called" do
+      it "returns all posts made by users friend" do
+        post = FactoryBot.create(:post, user_id: friend.id)
+        post2 = FactoryBot.create(:post, user_id: friend2.id )
+        posts = Post.relevant_posts(user)
+        expect(posts).to include post, post2
+      end
+    end
+  end
 end
