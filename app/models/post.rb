@@ -9,8 +9,9 @@ class Post < ApplicationRecord
   end
 
   def self.relevant_posts(user)
-    user.friends.map do |friend|
-      Post.find_by("user_id = ?", friend.id)
+    posts = user.friends.map do |friend|
+      Post.where("user_id = ?", friend.id).to_a
     end
+    posts.flatten
   end
 end
