@@ -1,9 +1,20 @@
-<% Post.includes(:user).order("created_at DESC").relevant_posts(current_user).each do |post| %>
+<% Post.includes(:user, :likes).order("created_at DESC").relevant_posts(current_user).each do |post| %>
   <div>
     <div>
       <%= post.user.name %>
       <%= post.created_at%>
     </div>
     <%= post.text_content %>
+    <div data-controller="likes">
+    <% if post.likes.any? %>
+      <p data-likes-target="likeCounter"><%= pluralize(post.likes.count, "Like") %></p>
+    <% else %>
+      <p data-likes-target="likeCounter"></p>
+    <% end %>
+    <%= button_to "Like", likes_path( like: {user_id: current_user.id, likeable_type: "Post", likeable_id: post.id }), data:{
+      action: "likes#changeCount",
+      likes_target: "likeBtn",
+    }, method: :post %>
+    </div>
   </div>
 <% end %>

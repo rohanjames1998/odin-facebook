@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users, only: [ :index, :show ]
   resources :friendships, only: [ :create, :update ]
   resources :posts, only: [ :create ]
+  resources :likes, only: [ :create ]
 
   delete 'friendship/:requested_user_id/request_sender_id', to: 'friendships#destroy', as: :cancel_request
 end
