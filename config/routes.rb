@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   resources :posts, only: [ :create ]
   resources :likes, only: [ :create ]
 
-  delete 'friendship/:requested_user_id/request_sender_id', to: 'friendships#destroy', as: :cancel_request
+  delete 'friendship/:requested_user_id/:request_sender_id', to: 'friendships#destroy', as: :cancel_request
+  delete 'like/:user_id/:likeable_type/:likeable_id', to: 'likes#destroy', as: :remove_like
 end
