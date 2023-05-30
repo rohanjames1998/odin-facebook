@@ -5,7 +5,6 @@ export default class extends Controller {
 
 
   changeCount(e){
-    e.preventDefault();
     const indicatorText = this.likeCounterTarget.textContent
     console.log("hello")
     if (indicatorText == ""){
