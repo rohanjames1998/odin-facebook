@@ -1,12 +1,12 @@
 <% @users.each do |user| %>
     <% if user != current_user %>
-      <div data-controller="friend-req">
+      <div data-controller="button-changer">
         <p><%= user.first_name %> <%= user.last_name %></p>
         <%= button_to "Add Friend", friendships_path(friendship: { requested_user_id: user.id, request_sender_id: current_user.id,
           notifications_attributes: [ receiver_id: user.id, sender_id: current_user.id ]}), data: {
-            action: "friend-req#changeBtn", friend_req_target: "friendReqBtn"}, method: :post
+            action: "button-changer#changeBtn", button_changer_target: "btn"}, method: :post
           %>
-            <%= button_to "Cancel Request", cancel_request_path( requested_user_id: user.id, request_sender_id: current_user.id ), data: { action: "friend-req#changeBtn", friend_req_target: "friendReqBtn" }, class: "hidden", method: :delete %>
+            <%= button_to "Cancel Request", cancel_request_path( requested_user_id: user.id, request_sender_id: current_user.id ), data: { action: "button-changer#changeBtn", button_changer_target: "btn" }, class: "hidden", method: :delete %>
       </div>
     <% end %>
 <% end %>

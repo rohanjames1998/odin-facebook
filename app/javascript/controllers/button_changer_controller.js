@@ -1,11 +1,11 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = [ 'friendReqBtn' ]
+  static targets = [ 'btn' ]
 
   changeBtn(e){
     setTimeout(() =>{
-      this.friendReqBtnTargets.forEach((btn) => {
+      this.btnTargets.forEach((btn) => {
         if (btn != e.target){
           btn.classList.remove("hidden");
           btn.disabled = false;
