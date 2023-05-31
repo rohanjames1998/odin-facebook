@@ -4,20 +4,33 @@ export default class extends Controller {
   static targets = [ 'likeBtn', 'likeCounter']
 
 
-  changeCount(e){
+  increaseCount(){
     const indicatorText = this.likeCounterTarget.textContent
-    console.log("hello")
     if (indicatorText == ""){
-      this.likeCounterTarget.textContent = "1 Like"
+      this.likeCounterTarget.textContent = "1 Like";
     }
     else if (indicatorText == "1 Like"){
-      this.likeCounterTarget.textContent = "2 Likes"
+      this.likeCounterTarget.textContent = "2 Likes";
     }
     else {
       // Increasing the likes count
-      let likesCount = parseInt(indicatorText.split(" ")[0])
-      console.log(likesCount)
-      this.likeCounterTarget.textContent = `${likesCount += 1} Likes`
+      let likesCount = parseInt(indicatorText.split(" ")[0]);
+      this.likeCounterTarget.textContent = `${likesCount += 1} Likes`;
+    }
+  }
+
+  decreaseCount(){
+    const indicatorText = this.likeCounterTarget.textContent
+    if (indicatorText == ""){
+      return;
+    }
+    else if (indicatorText == "1 Like"){
+      this.likeCounterTarget.textContent = "";
+    }
+    else {
+            // Decreasing the likes count
+            let likesCount = parseInt(indicatorText.split(" ")[0]);
+            this.likeCounterTarget.textContent = `${likesCount -= 1} Likes`;
     }
   }
 }
