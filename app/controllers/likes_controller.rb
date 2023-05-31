@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
   def create
     like = Like.new(like_params)
-    if already_liked?(like)
+    if helpers.already_liked?(like)
       head :forbidden
     else
       like.save!
@@ -10,8 +10,8 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    like = like.find_by(user_id: params[:user_id], likeable_type: params[:likeable_type], likeable_id: params[:likeable_id])
-    like.destroy
+    like = Like.find_by(user_id: params[:user_id], likeable_type: params[:likeable_type], likeable_id: params[:likeable_id])
+    like.destroy!
   end
 
   private
