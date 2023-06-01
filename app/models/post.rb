@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  belongs_to :user
+  belongs_to :author, class_name: "User"
   has_many :likes, as: :likeable, dependent: :delete_all
   enum :attachments, %i(unavailable available)
 
@@ -11,7 +11,7 @@ class Post < ApplicationRecord
 
   def self.relevant_posts(user)
     posts = user.friends.map do |friend|
-      Post.where("user_id = ?", friend.id).to_a
+      Post.where("author_id = ?", friend.id).to_a
     end
     posts.flatten
   end

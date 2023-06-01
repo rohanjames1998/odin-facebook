@@ -1,7 +1,7 @@
-<% Post.includes(:user, :likes).order("created_at DESC").relevant_posts(current_user).each do |post| %>
+<% Post.includes(:author, :likes).order("created_at DESC").relevant_posts(current_user).each do |post| %>
   <div>
     <div>
-      <%= post.user.name %>
+      <%= post.author.name %>
       <%= post.created_at%>
     </div>
     <%= post.text_content %>

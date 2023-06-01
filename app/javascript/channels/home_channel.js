@@ -16,7 +16,7 @@ consumer.subscriptions.create( { channel:"HomeChannel", room: getCookie("user_id
 
   template(data) {
     return `<div>
-              <p>${data.user.first_name }<p>
+              <p>${data.author.first_name }<p>
             </div>
             <div>
             <p>${data.text_content}<p>

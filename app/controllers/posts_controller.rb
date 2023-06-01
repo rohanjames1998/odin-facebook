@@ -4,9 +4,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       current_user.friends.each do |friend|
-        ActionCable.server.broadcast("home_#{friend.id}", @post.as_json(include: :user))
+        ActionCable.server.broadcast("home_#{friend.id}", @post.as_json(include: :author))
       end
-      ActionCable.server.broadcast("home_#{current_user.id}", @post.as_json(include: :user))
+      # For broadcasting the post to user's homepage
+      ActionCable.server.broadcast("home_#{current_user.id}", @post.as_json(include: :author))
     end
   end
 

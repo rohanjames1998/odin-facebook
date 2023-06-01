@@ -20,7 +20,7 @@ RSpec.describe Post, type: :model do
   end
 
   describe "associations" do
-    it { should belong_to(:user) }
+    it { should belong_to(:author) }
     it { should have_many(:likes) }
   end
 
@@ -36,8 +36,8 @@ RSpec.describe Post, type: :model do
 
     context "When called" do
       it "returns all posts made by users friend" do
-        post = FactoryBot.create(:post, user_id: friend.id)
-        post2 = FactoryBot.create(:post, user_id: friend2.id )
+        post = FactoryBot.create(:post, author_id: friend.id)
+        post2 = FactoryBot.create(:post, author_id: friend2.id )
         posts = Post.relevant_posts(user)
         expect(posts).to include post, post2
       end
