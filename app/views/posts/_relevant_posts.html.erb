@@ -13,7 +13,7 @@
     <% end %>
     <%# Because our #already_liked? method takes a like object we pass a new like object without persisting it to db %>
     <% if already_liked?(Like.new(user_id: current_user.id, likeable_type: "Post", likeable_id: post.id))%>
-      <%= button_to "Like", likes_path( like: {user_id: current_user.id, likeable_type: "Post", likeable_id: post.id }), data:{
+      <%= button_to "Like", likes_path( like: {user_id: current_user.id, likeable_type: "Post", likeable_id: post.id, notification_attributes: {receiver_id: post.author.id, sender_id: current_user.id}}), data:{
         action: "likes#increaseCount button-changer#changeBtn",
         likes_target: "likeBtn",
         button_changer_target: "btn"
@@ -25,7 +25,7 @@
         method: :delete
         %>
     <% else %>
-        <%= button_to "Like", likes_path( like: {user_id: current_user.id, likeable_type: "Post", likeable_id: post.id }), data:{
+        <%= button_to "Like", likes_path( like: {user_id: current_user.id, likeable_type: "Post", likeable_id: post.id,notification_attributes: {receiver_id: post.author.id, sender_id: current_user.id}}), data:{
         action: "likes#increaseCount button-changer#changeBtn",
         likes_target: "likeBtn",
         button_changer_target: "btn"

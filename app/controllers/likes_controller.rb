@@ -2,9 +2,12 @@ class LikesController < ApplicationController
   def create
     like = Like.new(like_params)
     if helpers.already_liked?(like)
+      # In the unlikely case where user has disabled their js and the unlike button doesn't
+      # show up this will prevent duplicate likes.
       head :forbidden
     else
-      like.save!
+      like.build_notification(receiver_id: params[:like][:notification_attributes][:receiver_id], sender_id: params[:like][:notification_attributes][:sender_id])
+      like.save
       head :no_content
     end
   end
@@ -16,6 +19,6 @@ class LikesController < ApplicationController
 
   private
   def like_params
-    params.require(:like).permit(:user_id, :likeable_type, :likeable_id)
+    params.require(:like).permit(:user_id, :likeable_type, :likeable_id, notification_attributes: [:receiver_id, :sender_id])
   end
 end

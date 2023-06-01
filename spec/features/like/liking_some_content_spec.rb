@@ -12,6 +12,8 @@ RSpec.describe "Liking some content", type: :feature, js: true do
 
     before do
       allow(Post).to receive(:relevant_posts).and_return([post])
+      # disabling bullet gem because it is wrongly presenting errors.
+      Bullet.enable = false
     end
 
     it "shows user that the content was liked" do
