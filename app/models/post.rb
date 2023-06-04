@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :author, class_name: "User"
+
   has_many :likes, as: :likeable, dependent: :delete_all
+  has_many :comments
+
   enum :attachments, %i(unavailable available)
 
   validates :text_content, presence: true, if: :attachments_present?

@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_090338) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_090054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "parent_comment_id"
+    t.string "text_content", default: ""
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.check_constraint "post_id IS NOT NULL AND parent_comment_id IS NULL OR post_id IS NULL AND parent_comment_id IS NOT NULL", name: "check_comment_belongs_to_post_or_parent_comment"
+  end
 
   create_table "friendships", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -69,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_090338) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "comments", column: "parent_comment_id"
   add_foreign_key "friendships", "users", column: "request_sender_id"
   add_foreign_key "friendships", "users", column: "requested_user_id"
   add_foreign_key "notifications", "users", column: "receiver_id"
