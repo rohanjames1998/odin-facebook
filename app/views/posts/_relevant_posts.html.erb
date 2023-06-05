@@ -1,5 +1,5 @@
 <% Post.includes(:author, :likes).order("created_at DESC").relevant_posts(current_user).each do |post| %>
-  <div>
+  <div id=<%="post_#{post.id}"%>>
     <div>
       <%= post.author.name %>
       <%= post.created_at%>
