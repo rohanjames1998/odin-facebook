@@ -19,9 +19,8 @@ RSpec.describe "Commenting on a post", type: :feature, js: true do
       login(user)
 
       click_button "Comment"
-      wait_for_changes
       fill_in "comment_text_content", with: quote
-      wait_for_changes
+      click_button "Post Comment"
 
       within "#comments" do
         expect(page).to have_content(quote)

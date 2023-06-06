@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   def create
-    comment = Comment.new(comment_params)
+    comment = current_user.comments.build(comment_params)
     comment.save!
   end
 

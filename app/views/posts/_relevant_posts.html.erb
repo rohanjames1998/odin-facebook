@@ -1,5 +1,23 @@
 <% Post.includes(:author, :likes, :comments).order("created_at DESC").relevant_posts(current_user).each do |post| %>
-  <div id=<%="post_#{post.id}"%>>
-  <%= render partial: "posts/post", locals: { post: post }  %>
+  <div id=<%="post_#{post.id}"%> data-controller="comments">
+    <%= render partial: "posts/post", locals: { post: post }  %>
+    <%# TODO! add close button to dialog %>
+  <dialog data-comments-target="dialogBox">
+    <%= render partial: "posts/post", locals: { post: post }  %>
+    <div id="comments" data-comments-target="commentsCont">
+      <% post.comments.each do |comment| %>
+        <div id="comment_<%= comment.id %>">
+          <%= comment.text_content%>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with scope: :comment, url: comments_path, method: :post do |f| %>
+        <%= f.hidden_field :post_id, value: post.id %>
+        <%= f.text_area :text_content, data: { comments_target: "commentText" }%>
+        <%= f.submit "Post Comment", data: { action: "comments#prependComment"} %>
+      <% end %>
+    </div>
+  </dialog>
   </div>
 <% end %>
