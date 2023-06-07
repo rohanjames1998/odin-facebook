@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_050518) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_07_052820) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,7 +24,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_050518) do
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
-    t.check_constraint "post_id IS NOT NULL AND parent_comment_id IS NULL OR post_id IS NULL AND parent_comment_id IS NOT NULL", name: "check_comment_belongs_to_post_or_parent_comment"
   end
 
   create_table "friendships", force: :cascade do |t|

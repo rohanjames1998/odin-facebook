@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   describe "associations" do
-    it { should belong_to(:post).optional }
+    it { should belong_to(:post) }
     it { should belong_to(:author).class_name("User") }
     it { should have_many(:likes) }
     it { should have_many(:notifications) }
