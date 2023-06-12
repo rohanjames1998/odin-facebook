@@ -1,0 +1,38 @@
+    <div>
+      <%= post.author.name %>
+      <%= post.created_at%>
+    </div>
+    <%= post.text_content %>
+    <div data-controller="likes button-changer">
+    <% if post.likes.any? %>
+      <p data-likes-target="likeCounter"><%= pluralize(post.likes.count, "Like") %></p>
+    <% else %>
+      <p data-likes-target="likeCounter"></p>
+    <% end %>
+    <%# Because our #already_liked? method takes a like object we pass a new like object without persisting it to db %>
+    <% if already_liked?(Like.new(user_id: cookies[:user_id], likeable_type: "Post", likeable_id: post.id))%>
+      <%= button_to "Like", likes_path( like: {user_id: cookies[:user_id], likeable_type: "Post", likeable_id: post.id, notification_attributes: {receiver_id: post.author.id, sender_id: cookies[:user_id]}}), data:{
+        action: "likes#increaseCount button-changer#changeBtn",
+        likes_target: "likeBtn",
+        button_changer_target: "btn"
+      }, class: "hidden", disabled: true, method: :post %>
+      <%= button_to "Unlike", remove_like_path( user_id: cookies[:user_id], likeable_type: "Post", likeable_id: post.id), data: {
+        action: "likes#decreaseCount button-changer#changeBtn",
+        button_changer_target: "btn",
+        likes_target: "likeBtn"},
+        method: :delete
+        %>
+    <% else %>
+        <%= button_to "Like", likes_path( like: {user_id: cookies[:user_id], likeable_type: "Post", likeable_id: post.id,notification_attributes: {receiver_id: post.author.id, sender_id: cookies[:user_id]}}), data:{
+        action: "likes#increaseCount button-changer#changeBtn",
+        likes_target: "likeBtn",
+        button_changer_target: "btn"
+      }, method: :post %>
+         <%= button_to "Unlike", remove_like_path( user_id: cookies[:user_id], likeable_type: "Post", likeable_id: post.id), data: {
+          action: "likes#decreaseCount button-changer#changeBtn",
+          button_changer_target: "btn",
+          likes_target: "likeBtn"}, class: "hidden", disabled: true,
+          method: :delete
+          %>
+    <% end %>
+    </div>

@@ -1,42 +1,5 @@
   <div id=<%="post_#{post.id}"%> data-controller="comments">
-    <div>
-      <%= post.author.name %>
-      <%= post.created_at%>
-    </div>
-    <%= post.text_content %>
-    <div data-controller="likes button-changer">
-    <% if post.likes.any? %>
-      <p data-likes-target="likeCounter"><%= pluralize(post.likes.count, "Like") %></p>
-    <% else %>
-      <p data-likes-target="likeCounter"></p>
-    <% end %>
-    <%# Because our #already_liked? method takes a like object we pass a new like object without persisting it to db %>
-    <% if already_liked?(Like.new(user_id: current_user.id, likeable_type: "Post", likeable_id: post.id))%>
-      <%= button_to "Like", likes_path( like: {user_id: current_user.id, likeable_type: "Post", likeable_id: post.id, notification_attributes: {receiver_id: post.author.id, sender_id: current_user.id}}), data:{
-        action: "likes#increaseCount button-changer#changeBtn",
-        likes_target: "likeBtn",
-        button_changer_target: "btn"
-      }, class: "hidden", disabled: true, method: :post %>
-      <%= button_to "Unlike", remove_like_path( user_id: current_user.id, likeable_type: "Post", likeable_id: post.id), data: {
-        action: "likes#decreaseCount button-changer#changeBtn",
-        button_changer_target: "btn",
-        likes_target: "likeBtn"},
-        method: :delete
-        %>
-    <% else %>
-        <%= button_to "Like", likes_path( like: {user_id: current_user.id, likeable_type: "Post", likeable_id: post.id,notification_attributes: {receiver_id: post.author.id, sender_id: current_user.id}}), data:{
-        action: "likes#increaseCount button-changer#changeBtn",
-        likes_target: "likeBtn",
-        button_changer_target: "btn"
-      }, method: :post %>
-         <%= button_to "Unlike", remove_like_path( user_id: current_user.id, likeable_type: "Post", likeable_id: post.id), data: {
-          action: "likes#decreaseCount button-changer#changeBtn",
-          button_changer_target: "btn",
-          likes_target: "likeBtn"}, class: "hidden", disabled: true,
-          method: :delete
-          %>
-    <% end %>
+    <%= render partial: "posts/post_format", locals: { post: post }%>
     <%= button_tag "Comment", type: "button", data: {action: "comments#openDialog" }%>
-    </div>
-    <%= render partial: "posts/dialog_for_post", locals: {post: post, current_user: current_user}%>
+    <%= render partial: "posts/dialog_for_post", locals: {post: post}%>
   </div>
