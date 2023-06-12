@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :friends_that_added_me,  -> { where status: "accepted"}, foreign_key: :requested_user_id, class_name: "Friendship"
   has_many :posts, foreign_key: :author_id
   has_many :comments, foreign_key: :author_id
+  has_many :likes
 
 
   def name
