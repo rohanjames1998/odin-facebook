@@ -10,17 +10,17 @@ consumer.subscriptions.create( { channel:"HomeChannel", room: getCookie("user_id
   },
 
   received(data) {
-    const postDisplay = document.querySelector("#posts")
-    postDisplay.insertAdjacentHTML("afterbegin", this.template(data));
+    // const postDisplay = document.querySelector("#posts")
+    // postDisplay.insertAdjacentHTML("afterbegin", this.template(data));
   },
 
   template(data) {
-    return `<div>
-              <p>${data.author.first_name }<p>
-            </div>
-            <div>
-            <p>${data.text_content}<p>
-            </div>`
+    // return `<div>
+    //           <p>${data.author.first_name }<p>
+    //         </div>
+    //         <div>
+    //         <p>${data.text_content}<p>
+    //         </div>`
   }
 });
 
