@@ -4,10 +4,21 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       current_user.friends.each do |friend|
-        ActionCable.server.broadcast("home_#{friend.id}", @post.as_json(include: :author))
+        # ActionCable.server.broadcast("home_#{friend.id}", @post.as_json(include: :author))
+        Turbo::StreamsChannel.broadcast_action_to(
+          "home_#{friend.id}",
+          action: :prepend,
+          target: "posts",
+          partial: "posts/post", locals: { post: @post, current_user: User.find(friend.id) }
+        )
       end
       # For broadcasting the post to user's homepage
-      ActionCable.server.broadcast("home_#{current_user.id}", @post.as_json(include: :author))
+      Turbo::StreamsChannel.broadcast_action_to(
+        "home_#{current_user.id}",
+        action: :prepend,
+        target: "posts",
+        partial: "posts/post", locals: { post: @post, current_user: current_user }
+      )
     end
   end
 
