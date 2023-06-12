@@ -4,8 +4,7 @@
 <%= button_tag "Reply", type: "button", data: { action: "comments#showReplyForm", comments_parent_id_param: comment.id, comments_target: "replyBtn" }%>
 <template data-comments-target="replyForm">
   <%= form_with scope: :comment, url: comments_path, method: :post do |f| %>
-    <%= f.hidden_field :post_id, value: post.id %>
-    <%= f.hidden_field :author_id, value: current_user.id %>
+    <%= f.hidden_field :post_id, value: comment.post.id %>
     <%= f.hidden_field :parent_comment_id, value: comment.id %>
     <%= f.text_area :text_content %>
     <%= f.submit "Post Comment" %>

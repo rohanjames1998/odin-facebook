@@ -9,7 +9,7 @@ class PostsController < ApplicationController
           "home_#{friend.id}",
           action: :prepend,
           target: "posts",
-          partial: "posts/post", locals: { post: @post, current_user: User.find(friend.id) }
+          partial: "posts/post", locals: { post: @post }
         )
       end
       # For broadcasting the post to user's homepage
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
         "home_#{current_user.id}",
         action: :prepend,
         target: "posts",
-        partial: "posts/post", locals: { post: @post, current_user: current_user }
+        partial: "posts/post", locals: { post: @post }
       )
     end
   end
