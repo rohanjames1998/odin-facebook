@@ -5,7 +5,7 @@ RSpec.describe LikesHelper, type: :helper do
     context "When user has already like the content" do
       it "returns true" do
         like = FactoryBot.create(:like)
-        request.cookies[:user_id] = like.user.id
+        request.session[:current_user_id] = like.user.id
         expect(helper.already_liked?(like.likeable_type, like.likeable_id)).to eq(true)
       end
     end
@@ -13,7 +13,7 @@ RSpec.describe LikesHelper, type: :helper do
       it "returns false" do
         # Because we are not persisting the like to database it should return false
         new_like = FactoryBot.build(:like)
-        request.cookies[:user_id] = new_like.user.id
+        request.session[:current_user_id] = new_like.user.id
         expect(helper.already_liked?(new_like.likeable_type, new_like.likeable_id)).to eq(false)
       end
     end

@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_user_id
-    cookies[:user_id] = current_user.id || nil
+    session[:current_user_id] = current_user.id || nil
   end
 end
