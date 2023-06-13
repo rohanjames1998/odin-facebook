@@ -1,7 +1,11 @@
 <div>
   <%= comment.text_content %>
 </div>
-<%= button_tag "Reply", type: "button", data: { action: "comments#showReplyForm", comments_parent_id_param: comment.id, comments_target: "replyBtn" }%>
+<%= button_tag "Reply",
+                type: "button",
+                data: { action: "comments#showReplyForm",
+                        comments_parent_id_param: comment.id,
+                        comments_target: "replyBtn" }%>
 <template data-comments-target="replyForm">
   <%= form_with scope: :comment, url: comments_path, method: :post do |f| %>
     <%= f.hidden_field :post_id, value: comment.post.id %>

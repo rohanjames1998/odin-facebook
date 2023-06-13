@@ -1,12 +1,16 @@
   <%# TODO! add close button to dialog %>
   <dialog data-comments-target="dialogBox" data-streams-target="dialogCont" data-action="keydown.esc->streams#endStream">
-    <%= button_tag "Close", type: "button", data: { action: "comments#closeDialog streams#endStream" }%>
-    <%= render partial: "posts/post_format", locals: { post: post }%>
+    <%= button_tag "Close",
+                  type: "button",
+                  data: { action: "comments#closeDialog streams#endStream" }%>
+    <%= render partial: "posts/post_format",
+               locals: { post: post }%>
     <div id="comments" data-comments-target="commentsCont">
       <% post.comments.includes(:replies).each do |comment| %>
         <div id="comment_<%= comment.id %>">
           <%# comment.text_content%>
-          <%= render partial: "comments/comment", locals: { post: post, comment: comment}%>
+          <%= render partial: "comments/comment",
+                     locals: { post: post, comment: comment}%>
         </div>
         <% if comment.replies.any? %>
           <% comment.replies.each_with_index do |reply, index|%>
@@ -21,11 +25,11 @@
     <div>
       <%= form_with scope: :comment, url: comments_path, method: :post do |f| %>
         <%= f.hidden_field :post_id, value: post.id %>
-        <%= f.text_area :text_content, data: { comments_target: "commentText" }%>
-        <%= f.submit "Post Comment", data: { action: "comments#prependComment"} %>
+        <%= f.text_area :text_content %>
+        <%= f.submit "Post Comment"%>
       <% end %>
     </div>
     <template data-streams-target="streamElement">
-    <%= turbo_stream_from "post_#{post.id}" %>
+      <%= turbo_stream_from "post_#{post.id}" %>
     </template>
   </dialog>
