@@ -1,7 +1,7 @@
   <%# TODO! add close button to dialog %>
-  <dialog data-comments-target="dialogBox">
+  <dialog data-comments-target="dialogBox" data-streams-target="dialogCont" data-action="keydown.esc->streams#endStream">
+    <%= button_tag "Close", type: "button", data: { action: "comments#closeDialog streams#endStream" }%>
     <%= render partial: "posts/post_format", locals: { post: post }%>
-    <%= turbo_stream_from "post_#{post.id}" %>
     <div id="comments" data-comments-target="commentsCont">
       <% post.comments.includes(:replies).each do |comment| %>
         <div id="comment_<%= comment.id %>">
@@ -25,4 +25,7 @@
         <%= f.submit "Post Comment", data: { action: "comments#prependComment"} %>
       <% end %>
     </div>
+    <template data-streams-target="streamElement">
+    <%= turbo_stream_from "post_#{post.id}" %>
+    </template>
   </dialog>
