@@ -4,30 +4,15 @@
                   type: "button",
                   data: { action: "comments#closeDialog streams#endStream" }%>
     <%= render partial: "posts/post_format",
-               locals: { post: post }%>
+               locals: { post: post } %>
     <div id="comments" data-comments-target="commentsCont">
       <% post.comments.includes(:replies).each do |comment| %>
-        <div id="comment_<%= comment.id %>">
-          <%# comment.text_content%>
           <%= render partial: "comments/comment",
-                     locals: { post: post, comment: comment}%>
-        </div>
-        <% if comment.replies.any? %>
-          <% comment.replies.each_with_index do |reply, index|%>
-          <%# Index is for visually indenting each reply as done below (see class)%>
-            <div id="reply_<%= reply.id %>" class="m-[<%= index + 3 %>]px">
-              <%= reply.text_content %>
-            </div>
-          <% end %>
-        <% end %>
+                     locals: { post: post, comment: comment } %>
       <% end %>
     </div>
     <div>
-      <%= form_with scope: :comment, url: comments_path, method: :post do |f| %>
-        <%= f.hidden_field :post_id, value: post.id %>
-        <%= f.text_area :text_content %>
-        <%= f.submit "Post Comment"%>
-      <% end %>
+      <%= render partial: "comments/form", locals: { post: post } %>
     </div>
     <template data-streams-target="streamElement">
       <%= turbo_stream_from "post_#{post.id}" %>

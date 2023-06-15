@@ -11,28 +11,37 @@
     <% end %>
     <%# Because our #already_liked? method takes a like object we pass a new like object without persisting it to db %>
     <% if already_liked?("Post", post.id) %>
-      <%= button_to "Like", likes_path( like: { likeable_type: "Post", likeable_id: post.id, notification_attributes: { receiver_id: post.author.id }}), data:{
-        action: "likes#increaseCount button-changer#changeBtn",
-        likes_target: "likeBtn",
-        button_changer_target: "btn"
+      <%= button_to "Like", likes_path( like: { likeable_type: "Post",
+                                                likeable_id: post.id,
+                                                notification_attributes: { receiver_id: post.author.id }}),
+                                        data:{ action: "likes#increaseCount
+                                                        button-changer#changeBtn",
+                                               likes_target: "likeBtn",
+                                               button_changer_target: "btn"
       }, class: "hidden", disabled: true, method: :post %>
-      <%= button_to "Unlike", remove_like_path(likeable_type: "Post", likeable_id: post.id), data: {
+      <%= button_to "Unlike", remove_like_path(likeable_type: "Post",
+                                               likeable_id: post.id), data: {
         action: "likes#decreaseCount button-changer#changeBtn",
         button_changer_target: "btn",
         likes_target: "likeBtn"},
         method: :delete
         %>
     <% else %>
-        <%= button_to "Like", likes_path( like: { likeable_type: "Post", likeable_id: post.id,notification_attributes: { receiver_id: post.author.id }}), data:{
-        action: "likes#increaseCount button-changer#changeBtn",
-        likes_target: "likeBtn",
-        button_changer_target: "btn"
-      }, method: :post %>
-         <%= button_to "Unlike", remove_like_path(likeable_type: "Post", likeable_id: post.id), data: {
-          action: "likes#decreaseCount button-changer#changeBtn",
-          button_changer_target: "btn",
-          likes_target: "likeBtn"}, class: "hidden", disabled: true,
-          method: :delete
-          %>
+        <%= button_to "Like", likes_path( like: { likeable_type: "Post",
+                                                  likeable_id: post.id,
+                                                  notification_attributes: { receiver_id: post.author.id }}),
+                                          data:{action: "likes#increaseCount
+                                                         button-changer#changeBtn",
+                                                likes_target: "likeBtn",
+                                                button_changer_target: "btn"},
+                                                method: :post %>
+         <%= button_to "Unlike", remove_like_path(likeable_type: "Post",
+                                                  likeable_id: post.id),
+                                  data: { action: "likes#decreaseCount
+                                                   button-changer#changeBtn",
+                                        button_changer_target: "btn",
+                                        likes_target: "likeBtn" },
+                                        class: "hidden", disabled: true,
+                                        method: :delete %>
     <% end %>
     </div>
