@@ -1,15 +1,9 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = [ 'dialogBox', "commentsCont", "commentText", "replyForm", "replyBtn" ]
+  static targets = ["commentsCont", "commentText", "replyForm", "replyBtn" ]
 
-  openDialog() {
-    this.dialogBoxTarget.showModal();
-  }
 
-  closeDialog() {
-    this.dialogBoxTarget.close();
-  }
 
   showReplyForm(e){
     const parentId = e.params.parentId;
