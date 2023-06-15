@@ -1,0 +1,13 @@
+<div class="m-[<%= reply_count + 3 %>px]" id="comment_#<%= comment.id %>">
+  <div>
+    <%= comment.text_content %>
+  </div>
+  <%= button_tag "Reply",
+                  type: "button",
+                  data: { action: "comments#showReplyForm",
+                          comments_parent_id_param: comment.id,
+                          comments_target: "replyBtn" }%>
+  <template data-comments-target="replyForm">
+    <%= render partial: "comments/reply_form", locals: { parent_comment: comment } %>
+  </template>
+</div>

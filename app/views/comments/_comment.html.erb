@@ -1,16 +1,23 @@
-<div>
-  <%= comment.text_content %>
-</div>
-<%= button_tag "Reply",
-                type: "button",
-                data: { action: "comments#showReplyForm",
-                        comments_parent_id_param: comment.id,
-                        comments_target: "replyBtn" }%>
-<template data-comments-target="replyForm">
-  <%= form_with scope: :comment, url: comments_path, method: :post do |f| %>
-    <%= f.hidden_field :post_id, value: comment.post.id %>
-    <%= f.hidden_field :parent_comment_id, value: comment.id %>
-    <%= f.text_area :text_content %>
-    <%= f.submit "Post Comment" %>
+<div id="comment_<%= comment.id %>">
+  <div>
+    <%= comment.text_content %>
+  </div>
+  <% if comment.replies.present? %>
+    <% comment.replies.each_with_index do |reply, index|%>
+      <%# Index is for visually indenting each reply as done below (see class)%>
+      <%= render partial: "comments/reply",
+                 locals: { post: post,
+                           comment: reply,
+                           reply_count: index,
+                           parent_comment: comment } %>
+    <% end %>
   <% end %>
-</template>
+  <%= button_tag "Reply",
+                  type: "button",
+                  data: { action: "comments#showReplyForm",
+                          comments_parent_id_param: comment.id,
+                          comments_target: "replyBtn" }%>
+  <template data-comments-target="replyForm">
+    <%= render partial: "comments/reply_form", locals: { parent_comment: comment } %>
+  </template>
+</div>
