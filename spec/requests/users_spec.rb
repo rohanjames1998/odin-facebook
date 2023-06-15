@@ -5,7 +5,7 @@ RSpec.describe "Users", type: :request do
   let(:user) { FactoryBot.create(:user) }
     context "If user is signed in" do
       it "redirects to user's home page" do
-        allow_any_instance_of(Devise::Controllers::Helpers).to receive(:user_signed_in?).and_return true
+        allow_any_instance_of(Devise::Controllers::Helpers).to receive(:authenticate_user!).and_return true
         allow_any_instance_of(Devise::Controllers::Helpers).to receive(:current_user).and_return(user)
 
         get root_path
