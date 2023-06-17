@@ -20,6 +20,7 @@ RSpec.describe "When user creates a post", type: :feature, js: true do
         wait_for_changes
         login(user)
         wait_for_changes
+        click_button "Create Post"
         fill_in "post_text_content", with: quote
         click_button "Post"
       end

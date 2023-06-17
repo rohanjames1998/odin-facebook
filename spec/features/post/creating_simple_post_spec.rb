@@ -11,6 +11,7 @@ RSpec.describe "Creating post", type: :feature, js: true do
     it "shows on their home page" do
       login(user)
 
+      click_button "Create Post"
       fill_in "post_text_content", with: quote
       click_button "Post"
       wait_for_changes
