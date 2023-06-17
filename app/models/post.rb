@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: "User"
 
   has_many :likes, as: :likeable, dependent: :delete_all
+  has_many_attached :images
   has_many :comments
 
   enum :attachments, %i(unavailable available)

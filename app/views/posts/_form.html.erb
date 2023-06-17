@@ -1,0 +1,13 @@
+
+<dialog data-dialogs-target="dialogBox">
+  <%= form_with scope: :post,
+                url: posts_path,
+                method: :post,
+                id: "post_form" do |f| %>
+    <%= f.text_area :text_content %>
+    <%= f.file_field :images,
+                      multiple: true,
+                      accept: 'image/jpeg,image/png'%>
+    <%= f.submit "Post", data: { action: "dialogs#closeDialog" } %>
+  <% end %>
+</dialog>

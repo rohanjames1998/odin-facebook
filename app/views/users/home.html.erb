@@ -9,11 +9,11 @@
   <% end %>
   </div>
 
-  <div>
-  <%= form_with scope: :post, url: posts_path, method: :post, id: "post_form" do |f| %>
-    <%= f.text_area :text_content %>
-    <%= f.submit "Post" %>
-  <% end %>
+  <div data-controller="dialogs" >
+    <%= button_tag "Create Post",
+        type: "button",
+        data: { action: "dialogs#openDialog" }%>
+    <%= render "posts/form" %>
   </div>
   <%= turbo_stream_from "home_#{current_user.id}" %>
   <div id="posts">

@@ -1,10 +1,10 @@
   <div id=<%="post_#{ post.id }"%> data-controller="comments">
     <%= render partial: "posts/post_format",
         locals: { post: post }%>
-    <div data-controller="streams">
+    <div data-controller="streams dialogs">
       <%= button_tag "Comment",
           type: "button",
-          data: { action: "comments#openDialog streams#startStream" }%>
+          data: { action: "dialogs#openDialog streams#startStream" }%>
       <%= render partial: "posts/dialog_for_post",
           locals: { post: post }%>
     </div>

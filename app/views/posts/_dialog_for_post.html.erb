@@ -1,8 +1,7 @@
-  <%# TODO! add close button to dialog %>
-  <dialog data-comments-target="dialogBox" data-streams-target="dialogCont" data-action="keydown.esc->streams#endStream">
+  <dialog data-dialogs-target="dialogBox" data-streams-target="dialogCont" data-action="keydown.esc->streams#endStream">
     <%= button_tag "Close",
                   type: "button",
-                  data: { action: "comments#closeDialog streams#endStream" }%>
+                  data: { action: "dialogs#closeDialog streams#endStream" }%>
     <%= render partial: "posts/post_format",
                locals: { post: post } %>
     <div id="comments" data-comments-target="commentsCont">

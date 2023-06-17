@@ -4,7 +4,6 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       current_user.friends.each do |friend|
-        # ActionCable.server.broadcast("home_#{friend.id}", @post.as_json(include: :author))
         Turbo::StreamsChannel.broadcast_action_to(
           "home_#{friend.id}",
           action: :prepend,
@@ -25,7 +24,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:text_content)
+    params.require(:post).permit(:text_content, images: [] )
   end
 
 end

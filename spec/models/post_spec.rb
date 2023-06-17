@@ -22,6 +22,7 @@ RSpec.describe Post, type: :model do
   describe "associations" do
     it { should belong_to(:author) }
     it { should have_many(:likes) }
+    it { should have_many_attached(:images) }
     it { should have_many(:comments) }
   end
 
