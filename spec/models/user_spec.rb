@@ -18,6 +18,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:friends_i_added) }
     it { should have_many(:friends_that_added_me) }
     it { should have_many(:comments) }
+    it { should have_many(:texts) }
     it { should have_many(:likes) }
   end
 
