@@ -8,13 +8,13 @@ RSpec.describe Post, type: :model do
         before do
          allow(subject).to receive(:attachments).and_return [:present]
         end
-        it { should_not validate_presence_of(:text_content) }
+        it { should_not validate_presence_of(:text) }
       end
       context "When attachments are not available" do
         before do
         allow(subject).to receive(:attachments).and_return [:not_present]
         end
-        it { should_not validate_presence_of(:text_content) }
+        it { should_not validate_presence_of(:text) }
       end
     end
   end
@@ -24,6 +24,8 @@ RSpec.describe Post, type: :model do
     it { should have_many(:likes) }
     it { should have_many_attached(:images) }
     it { should have_many(:comments) }
+    it { should have_one(:text) }
+    it { should accept_nested_attributes_for(:text) }
   end
 
   describe ".relevant_posts" do

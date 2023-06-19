@@ -2,8 +2,8 @@
       <%= post.author.name %>
       <%= post.created_at%>
     </div>
-    <% if post.text_content.present? %>
-      <%= post.text_content %>
+    <% if post.text.present? %>
+      <%= post.text.content %>
     <% end %>
     <% if post.images.present? %>
       <% post.images.each do | img | %>

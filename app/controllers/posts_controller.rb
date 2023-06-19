@@ -2,6 +2,10 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    if params[:post][:text][:content] != ""
+      @post.build_text(content: params[:post][:text][:content], author_id: current_user.id )
+    end
+
     if @post.save
       current_user.friends.each do |friend|
         Turbo::StreamsChannel.broadcast_action_to(
@@ -24,7 +28,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:text_content, images: [] )
+    params.require(:post).permit(text_attributes: [ :content ] )
   end
-
 end

@@ -1,13 +1,18 @@
 class Post < ApplicationRecord
   belongs_to :author, class_name: "User"
-
+  has_one :text, as: :textable, dependent: :delete
   has_many :likes, as: :likeable, dependent: :delete_all
+  has_many :comments, dependent: :delete_all
   has_many_attached :images
-  has_many :comments
 
   enum :attachments, %i(unavailable available)
 
-  validates :text_content, presence: true, if: :attachments_present?
+  validates_associated :text
+
+  validates_presence_of :text, if: :attachments_present?
+
+  accepts_nested_attributes_for :text
+
 
   def attachments_present?
     available?

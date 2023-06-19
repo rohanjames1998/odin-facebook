@@ -4,7 +4,9 @@
                 url: posts_path,
                 method: :post,
                 id: "post_form" do |f| %>
-    <%= f.text_area :text_content %>
+                <%= f.fields_for :text do |text_f| %>
+                  <%= text_f.text_field :content %>
+                <% end %>
     <%= f.file_field :images,
                       multiple: true,
                       accept: 'image/jpeg,image/png'%>
