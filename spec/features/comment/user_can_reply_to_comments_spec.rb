@@ -9,16 +9,18 @@ RSpec.describe "Replying to a comment", type: :feature, js: true do
     let(:user) { FactoryBot.create(:user) }
     let(:post) { FactoryBot.create(:post) }
     let(:quote) { Faker::Quote.famous_last_words }
-    let(:comment) { FactoryBot.create(:comment, post_id: post.id)}
-
+    
     before do
       allow(Post).to receive(:relevant_posts).and_return([post])
       # disabling bullet gem because it is wrongly presenting errors.
       Bullet.enable = false
     end
     it "shows their reply under the comment" do
-      comment.post = post
+      comment = FactoryBot.create(:comment, post_id: post.id)
+
       login(user)
+      wait_for_changes
+
       click_button "Comment"
       within "#comment_#{comment.id}" do
         click_button "Reply"

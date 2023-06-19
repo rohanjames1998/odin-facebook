@@ -17,6 +17,7 @@ RSpec.describe "Commenting on a post", type: :feature, js: true do
     end
     it "shows their comment on the post" do
       login(user)
+      wait_for_changes
 
       click_button "Comment"
       fill_in "comment_text_content", with: quote
