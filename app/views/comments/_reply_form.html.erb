@@ -1,6 +1,8 @@
     <%= form_with scope: :comment, url: comments_path, method: :post do |f| %>
       <%= f.hidden_field :post_id, value: parent_comment.post.id %>
       <%= f.hidden_field :parent_comment_id, value: parent_comment.id %>
-      <%= f.text_area :text_content %>
+        <%= f.fields_for :text do |text_f| %>
+          <%= text_f.text_field :content %>
+        <% end %>
       <%= f.submit "Post Comment" %>
     <% end %>

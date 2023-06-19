@@ -5,7 +5,7 @@
     <%= render partial: "posts/post_format",
                locals: { post: post } %>
     <div id="comments" data-comments-target="commentsCont">
-      <% post.comments.includes(:replies).each do |comment| %>
+      <% post.comments.includes(:replies, :text).each do |comment| %>
           <%= render partial: "comments/comment",
                      locals: { post: post, comment: comment } %>
       <% end %>

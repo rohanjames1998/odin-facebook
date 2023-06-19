@@ -6,6 +6,8 @@ RSpec.describe Comment, type: :model do
     it { should belong_to(:author).class_name("User") }
     it { should have_many(:likes) }
     it { should have_many(:notifications) }
+    it { should have_one(:text) }
+    it { should accept_nested_attributes_for(:text) }
     it do
       should belong_to(:parent_comment).
         class_name("Comment").optional
@@ -16,6 +18,6 @@ RSpec.describe Comment, type: :model do
   end
 
   describe "validations" do
-    it { should validate_presence_of(:text_content) }
+    it { should validate_presence_of(:text) }
   end
 end

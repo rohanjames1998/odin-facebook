@@ -1,9 +1,9 @@
 <div id="comment_<%= comment.id %>">
   <div>
-    <%= comment.text_content %>
+    <%= comment.text.content %>
   </div>
   <% if comment.replies.present? %>
-    <% comment.replies.each_with_index do |reply, index|%>
+    <% comment.replies.includes(:text).each_with_index do |reply, index|%>
       <%# Index is for visually indenting each reply as done below (see class)%>
       <%= render partial: "comments/reply",
                  locals: { post: post,
