@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_18_085845) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_19_070238) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,7 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_085845) do
 
   create_table "comments", force: :cascade do |t|
     t.bigint "parent_comment_id"
-    t.string "text_content", default: ""
     t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -88,7 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_085845) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "attachments", default: 0, null: false
-    t.string "text_content", default: ""
     t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
