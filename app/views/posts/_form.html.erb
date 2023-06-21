@@ -7,9 +7,11 @@
                 <%= f.fields_for :text do |text_f| %>
                   <%= text_f.text_field :content %>
                 <% end %>
-    <%= f.file_field :images,
-                      multiple: true,
-                      accept: 'image/jpeg,image/png'%>
+                <%= f.fields_for :images do |images_f| %>
+                    <%= images_f.file_field :pictures,
+                                          multiple: true,
+                                          accept: 'image/jpeg,image/png'%>
+                <% end %>
     <%= f.submit "Post", data: { action: "dialogs#closeDialog" } %>
   <% end %>
 </dialog>

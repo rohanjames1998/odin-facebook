@@ -22,10 +22,11 @@ RSpec.describe Post, type: :model do
   describe "associations" do
     it { should belong_to(:author) }
     it { should have_many(:likes) }
-    it { should have_many_attached(:images) }
+    it { should have_many(:images) }
     it { should have_many(:comments) }
     it { should have_one(:text) }
     it { should accept_nested_attributes_for(:text) }
+    it { should accept_nested_attributes_for(:images) }
   end
 
   describe ".relevant_posts" do

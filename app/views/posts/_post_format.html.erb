@@ -7,7 +7,7 @@
     <% end %>
     <% if post.images.present? %>
       <% post.images.each do | img | %>
-        <%= image_tag url_for(img) %>
+        <%= image_tag url_for(img.picture) %>
       <% end %>
     <% end %>
     <div data-controller="likes button-changer">

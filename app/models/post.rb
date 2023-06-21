@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   has_one :text, as: :textable, dependent: :delete
   has_many :likes, as: :likeable, dependent: :delete_all
   has_many :comments, dependent: :delete_all
-  has_many_attached :images
+  has_many :images
 
   enum :attachments, %i(unavailable available)
 
@@ -12,6 +12,8 @@ class Post < ApplicationRecord
   validates_presence_of :text, if: :attachments_present?
 
   accepts_nested_attributes_for :text
+  accepts_nested_attributes_for :images
+
 
 
   def attachments_present?

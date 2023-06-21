@@ -9,11 +9,11 @@ RSpec.describe "Creating post with image", type: :feature, js: true do
   context "When user posts an uploaded image" do
     it "shows the image on their home page" do
       login(user)
+      wait_for_changes
 
       click_button "Create Post"
-      wait_for_changes
       attach_file('app/assets/images/test_img.png' ) do
-        find("#post_images").click
+        find("#post_images_pictures").click
       end
       wait_for_changes
       click_button 'Post'
@@ -27,11 +27,12 @@ RSpec.describe "Creating post with image", type: :feature, js: true do
 
     it "shows multiple images with quotes on their homepage" do
       login(user)
+      wait_for_changes
 
       click_button "Create Post"
       wait_for_changes
       attach_file(['app/assets/images/test_img.png', 'app/assets/images/test_img_2.png']) do
-        find("#post_images").click
+        find("#post_images_pictures").click
       end
       fill_in "post_text_content", with: quote
       wait_for_changes

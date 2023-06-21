@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_19_222633) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_20_070107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,6 +67,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_222633) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "uploader_id"
+    t.bigint "post_id"
+    t.index ["post_id"], name: "index_images_on_post_id"
     t.index ["uploader_id"], name: "index_images_on_uploader_id"
   end
 
@@ -131,6 +133,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_222633) do
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "friendships", "users", column: "request_sender_id"
   add_foreign_key "friendships", "users", column: "requested_user_id"
+  add_foreign_key "images", "posts"
   add_foreign_key "images", "users", column: "uploader_id"
   add_foreign_key "notifications", "users", column: "receiver_id"
   add_foreign_key "notifications", "users", column: "sender_id"
