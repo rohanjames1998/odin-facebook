@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   has_one :text, as: :textable, dependent: :delete
   has_many :likes, as: :likeable, dependent: :delete_all
   has_many :comments, dependent: :delete_all
-  has_many :images
+  has_many :images, as: :imageable, dependent: :delete_all
 
   enum :attachments, %i(unavailable available)
 
