@@ -18,4 +18,39 @@ RSpec.describe LikesHelper, type: :helper do
       end
     end
   end
+
+  describe "#add_likes_to_associated_models" do
+  let(:post) { FactoryBot.create(:post) }
+  let(:img_1) { FactoryBot.create(:image) }
+  let(:img_2) { FactoryBot.create(:image) }
+  let(:text) { FactoryBot.create(:text) }
+  let(:comment) { FactoryBot.create(:comment)}
+
+  before do
+    helper.request.session[:current_user_id] =
+    FactoryBot.create(:user).id
+  end
+    context "When given post model" do
+      it "add likes to all associated images" do
+        post.images << img_1
+        post.images << img_2
+        helper.add_likes_to_associated_models("Post", post.id)
+        expect(img_1.likes.count).to eq 1
+        expect(img_2.likes.count).to eq 1
+      end
+
+      it "add likes to associated text" do
+        post.text = text
+        helper.add_likes_to_associated_models("Post", post.id)
+        expect(post.text.likes.count).to eq 1
+      end
+    end
+
+    context "When given comment model" do
+      it "add likes to associated text" do
+        helper.add_likes_to_associated_models("Comment", comment.id)
+        expect(comment.text.likes.count).to eq 1
+      end
+    end
+  end
 end

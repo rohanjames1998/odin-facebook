@@ -9,6 +9,7 @@ class LikesController < ApplicationController
       like.build_notification(receiver_id: params[:like][:notification_attributes][:receiver_id],
                               sender_id: current_user.id)
       like.save
+      helpers.add_likes_to_associated_models(like.likeable_type, like.likeable_id)
       head :no_content
     end
   end
