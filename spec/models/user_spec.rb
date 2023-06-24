@@ -21,6 +21,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:texts) }
     it { should have_many(:likes) }
     it { should have_many(:images) }
+    it { should have_one(:profile) }
   end
 
   describe "#name" do

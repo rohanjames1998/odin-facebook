@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :texts, foreign_key: :author_id
   has_many :images, foreign_key: :uploader_id
   has_many :likes
+  has_one :profile
 
 
   def name
