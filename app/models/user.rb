@@ -44,7 +44,7 @@ class User < ApplicationRecord
     email_address = self.email
     hash = Digest::MD5.hexdigest(email_address)
     image_src = "https://www.gravatar.com/avatar/#{hash}"
-    cover_loc = "#{Rails.root}/app/assets/images/default_cover.jpg"
+    cover_loc = "#{Rails.root}/app/assets/images/default_cover.jpeg"
     avatar_loc = "#{Rails.root}/app/assets/images/#{self.id}_default_avatar.png"
 
     #downloading the avatar
@@ -56,7 +56,7 @@ class User < ApplicationRecord
     # building and attaching avatar and cover.
     profile.build_avatar(uploader_id: user.id, sub_type: "profile_avatar")
     profile.build_cover(uploader_id: user.id, sub_type: "profile_cover")
-    profile.avatar.picture.attach(io: File.open(cover_loc), filename: "default_cover.jpg", content_type: "image/jpg")
+    profile.avatar.picture.attach(io: File.open(cover_loc), filename: "default_cover.jpg", content_type: "image/jpeg")
     profile.cover.picture.attach(io: File.open(avatar_loc), filename: "#{self.id}_default_avatar.png", content_type: "image/png")
     user.profile.save!
   end
