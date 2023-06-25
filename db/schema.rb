@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_22_194234) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_25_081505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_194234) do
     t.bigint "uploader_id"
     t.string "imageable_type"
     t.bigint "imageable_id"
+    t.text "sub_type", default: ""
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable"
     t.index ["uploader_id"], name: "index_images_on_uploader_id"
   end
