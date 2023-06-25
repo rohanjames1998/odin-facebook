@@ -1,3 +1,5 @@
+require "open-uri"
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -21,6 +23,7 @@ class User < ApplicationRecord
   has_many :likes
   has_one :profile
 
+  after_create :add_default_profile
 
   def name
     "#{first_name} #{last_name}"
@@ -33,6 +36,29 @@ class User < ApplicationRecord
     all_friends_ids = ids_of_friends_i_added + ids_of_friends_that_added_me
 
     User.find(all_friends_ids)
+  end
+
+  private
+
+  def add_default_profile
+    email_address = self.email
+    hash = Digest::MD5.hexdigest(email_address)
+    image_src = "https://www.gravatar.com/avatar/#{hash}"
+    cover_loc = "#{Rails.root}/app/assets/images/default_cover.jpg"
+    avatar_loc = "#{Rails.root}/app/assets/images/#{self.id}_default_avatar.png"
+
+    #downloading the avatar
+    IO.copy_stream(URI.open(image_src), avatar_loc)
+
+    user = User.find(self.id)
+
+    profile = user.create_profile!
+    # building and attaching avatar and cover.
+    profile.build_avatar(uploader_id: user.id, sub_type: "profile_avatar")
+    profile.build_cover(uploader_id: user.id, sub_type: "profile_cover")
+    profile.avatar.picture.attach(io: File.open(cover_loc), filename: "default_cover.jpg", content_type: "image/jpg")
+    profile.cover.picture.attach(io: File.open(avatar_loc), filename: "#{self.id}_default_avatar.png", content_type: "image/png")
+    user.profile.save!
   end
 
 end
