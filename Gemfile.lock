@@ -293,6 +293,7 @@ DEPENDENCIES
   rails (~> 7.0.4, >= 7.0.4.3)
   redis (~> 4.0)
   rspec-rails
+  ruby-vips (~> 2.1.4)
   selenium-webdriver (!= 4.9.1)
   shoulda-matchers
   sprockets-rails

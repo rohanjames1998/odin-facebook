@@ -86,3 +86,5 @@ end
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "image_processing", ">= 1.2"
+
+gem "ruby-vips", "~> 2.1.4"
