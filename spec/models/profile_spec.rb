@@ -4,6 +4,8 @@ RSpec.describe Profile, type: :model do
   describe "associations" do
     it { should have_one(:avatar).class_name("Image").conditions(sub_type: "profile_avatar") }
     it { should have_one(:cover).class_name("Image").conditions(sub_type: "profile_cover") }
+    it { should accept_nested_attributes_for(:avatar) }
+    it { should accept_nested_attributes_for(:cover) }
     it { should belong_to(:user) }
   end
 
