@@ -1,0 +1,34 @@
+  <%# Even though every user has a profile created when they
+  sign up we still use put just in case there was a problem in creating a default profile
+  in the beginning. %>
+<%= form_with scope: :profile, url: profile_path,  method: :put do |f| %>
+  <div>
+    <%= f.fields_for :avatar do |avatar_f| %>
+      <%= avatar_f.label :picture, "Avatar" %>
+      <%= avatar_f.file_field :picture, multiple: false, accept: 'image/jpeg, image/png'%>
+    <% end %>
+  </div>
+  <div>
+    <%= f.fields_for :cover do |cover_f| %>
+    <%= cover_f.label :picture, "Cover" %>
+      <%= cover_f.file_field :picture, multiple: false, accept: 'image/jpeg, image/png'%>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :bio, "Bio" %>
+    <%= f.text_area :bio %>
+  </div>
+  <div>
+    <%= f.label :country, "Country" %>
+    <%= f.text_field :country %>
+  </div>
+  <div>
+    <%= f.label :city, "City" %>
+    <%= f.text_field :city %>
+  </div>
+  <div>
+    <%= f.label :date_of_birth, "Date Of Birth" %>
+    <%= f.date_field :date_of_birth %>
+  </div>
+  <%= f.submit %>
+<% end %>
