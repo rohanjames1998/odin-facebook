@@ -1,1 +1,33 @@
-@user.name
+<div data-controller="dialogs">
+  <%= button_tag "Edit profile",
+      type: "button",
+      data: { action: "dialogs#openDialog"} %>
+
+  <dialog data-dialogs-target="dialogBox">
+    <%= button_tag "Close",
+                    type: "button",
+                    data: { action:"dialogs#closeDialog" }%>
+      <%= render partial: "profiles/edit_form" %>
+  </dialog>
+</div>
+
+<% if @profile != nil %>
+  <div>
+    <%= image_tag url_for(@profile.cover.picture) %>
+  </div>
+  <div>
+    <%= current_user.name %>
+  </div>
+  <div>
+    <%= image_tag url_for(@profile.avatar.picture)%>
+  </div>
+  <div>
+    <%= @profile.bio %>
+  </div>
+  <div>
+    <%= @profile.date_of_birth %>
+  </div>
+  <div>
+    <%= @profile.city %>, <%= @profile.country %>
+  </div>
+<% end %>
