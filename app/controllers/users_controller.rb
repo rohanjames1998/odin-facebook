@@ -7,6 +7,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    @profile = current_user.profile || nil
+  end
+
   def root
     if user_signed_in?
       redirect_to user_home_path(current_user)
