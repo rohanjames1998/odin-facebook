@@ -1,7 +1,10 @@
 class ProfilesController < ApplicationController
   def update
-    if current_user.profile.update!(params)
-      redirect_to users_path(current_user), notice: "Updated successfully!"
+    profile = current_user.profile
+    if profile.update(profile_params)
+      update_avatar(params, profile)
+      update_cover(params, profile)
+      redirect_to user_path(current_user), notice: "Updated successfully!"
     else
       head :unprocessable_entity
     end
@@ -11,20 +14,20 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit( :bio, :city, :country, :date_of_birth, avatar:[ :picture ], cover: [ :picture ] )
+    params.require(:profile).permit( :bio, :city, :country, :date_of_birth)
   end
 
-  # def make_new_profile(params)
-  #   p params
-  #   profile = current_user.build_profile
-  #   profile.avatar.build(picture: params[:avatar][:picture], uploader_id: current_user.id, sub_type: "profile_avatar")
+  #Not sanitizing avatar or cover params because we have
+  # separate methods to update those two.
+  def update_avatar(params, profile)
+    if params[:profile][:avatar].present?
+      profile.avatar.picture.attach(params[:profile][:avatar][:picture])
+    end
+  end
 
-  #   profile.cover.build(picture: params[:profile][:cover][:picture], uploader_id: current_user.id, sub_type: "profile_cover")
-
-  #   if profile.save!
-  #     redirect_to users_path(current_user), notice: "Profile created!"
-  #   else
-  #     head :unprocessable_entity
-  #   end
-  # end
+  def update_cover(params, profile)
+    if params[:profile][:cover].present?
+      profile.cover.picture.attach(params[:profile][:cover][:picture])
+    end
+  end
 end
