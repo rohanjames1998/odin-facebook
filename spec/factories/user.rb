@@ -8,6 +8,10 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     password { Faker::Internet.password(min_length: 8) }
     email { Faker::Internet.email }
+
+    trait :with_profile do
+      profile { association :profile }
+    end
   end
 
 end
