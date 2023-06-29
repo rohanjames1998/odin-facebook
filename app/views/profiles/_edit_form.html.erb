@@ -1,7 +1,4 @@
-  <%# Even though every user has a profile created when they
-  sign up we still use put just in case there was a problem in creating a default profile
-  in the beginning. %>
-<%= form_with scope: :profile, url: profile_path,  method: :put do |f| %>
+<%= form_with scope: :profile, url: profile_path,  method: :patch do |f| %>
   <div>
     <%= f.fields_for :avatar do |avatar_f| %>
       <%= avatar_f.label :picture, "Avatar" %>
