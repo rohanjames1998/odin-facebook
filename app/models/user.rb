@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  devise :omniauthable, omniauth_providers: %i(facebook)
+  devise :omniauthable, omniauth_providers: [:facebook]
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
@@ -37,6 +37,22 @@ class User < ApplicationRecord
     all_friends_ids = ids_of_friends_i_added + ids_of_friends_that_added_me
 
     User.find(all_friends_ids)
+  end
+
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.name = auth.info.name
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
   end
 
   private
