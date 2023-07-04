@@ -282,6 +282,12 @@ Devise.setup do |config|
                   display: "page",
                   info_fields: "email,name"
 
+  config.omniauth :github,
+                        Rails.application.credentials.github[:GITHUB_KEY],
+                        Rails.application.credentials.github[:GITHUB_SECRET],
+                        scope: 'repo,user'
+
+
   OmniAuth.config.logger = Rails.logger if Rails.env.development? #for debug
 
   # ==> Warden configuration
