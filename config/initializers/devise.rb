@@ -274,9 +274,15 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
   config.omniauth :github,
-                        Rails.application.credentials.github[:GITHUB_KEY],
-                        Rails.application.credentials.github[:GITHUB_SECRET],
-                        scope: 'repo,user'
+                  Rails.application.credentials.github[:GITHUB_KEY],
+                  Rails.application.credentials.github[:GITHUB_SECRET],
+                  scope: 'repo,user'
+
+  config.omniauth :google_oauth2,
+                  Rails.application.credentials.google[:GOOGLE_KEY],
+                  Rails.application.credentials.google[:GOOGLE_SECRET],
+                  scope: 'email,profile'
+
 
 
   OmniAuth.config.logger = Rails.logger if Rails.env.development? #for debug
