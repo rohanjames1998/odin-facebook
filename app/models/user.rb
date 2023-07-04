@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  devise :omniauthable, omniauth_providers: [:facebook]
+  devise :omniauthable, omniauth_providers: [:facebook, :github]
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
@@ -41,9 +41,11 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
+      name = auth.info.name.split(' ')
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.name = auth.info.name
+      user.first_name = name[0]
+      user.last_name = name[1]
     end
   end
 
