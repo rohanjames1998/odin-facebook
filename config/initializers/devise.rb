@@ -273,15 +273,6 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  config.omniauth :facebook,
-                  Rails.application.credentials.facebook[:APP_ID],
-                  Rails.application.credentials.facebook[:APP_SECRET],
-                  token_params: { parse: :json },
-                  callback_path: "/users/auth/facebook/callback",
-                  scope: "email,public_profile",
-                  display: "page",
-                  info_fields: "email,name"
-
   config.omniauth :github,
                         Rails.application.credentials.github[:GITHUB_KEY],
                         Rails.application.credentials.github[:GITHUB_SECRET],
