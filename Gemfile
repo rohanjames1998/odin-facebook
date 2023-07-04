@@ -91,3 +91,4 @@ gem "ruby-vips", "~> 2.1.4"
 
 gem "omniauth-facebook"
 gem "omniauth-rails_csrf_protection"
+gem "omniauth-github"
