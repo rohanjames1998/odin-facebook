@@ -1,26 +1,33 @@
-<div>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
 
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
+<div class="flex items-center justify-center h-screen gap-28 pb-20 bg-slate-100">
+  <div class="flex mb-20 flex-col gap-2 w-2/6 ">
+    <h1 class="text-6xl font-extrabold text-dark-sky-blue">
+    breeze</h1>
+    <p class="text-xl font-bold">A cool place to share and connect, powered by Ruby On Rails.</p>
+  </div>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
+
+
+  <div class="flex flex-col bg-white p-10 w-2/6 rounded-lg">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email address", class:"w-full rounded-md border-gray-300 p-4 mb-4" %>
+
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", class:"w-full rounded-md border-gray-300 p-4 mb-4" %>
+
+        <%= f.submit "Log in", class: "w-full bg-dark-sky-blue font-bold text-2xl text-white rounded-md p-2 mb-4 cursor-pointer" %>
     <% end %>
+      <%= button_to user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, class: "flex items-center w-full p-2 justify-center shadow gap-6 shadow-gray-500 rounded-md mb-4" do %>
+        <%= image_tag "google-logo.png", alt: "google-logo", class: "h-6"%>
+        <span class="font-bold text-xl">Sign In With Google </span>
+      <% end %>
 
-    <div class="actions">
-      <%= f.submit "Log in" %>
-    </div>
-  <% end %>
-
-  <%= render "users/shared/links" %>
+      <%= button_to user_github_omniauth_authorize_path, data: { turbo: false }, class: "flex items-center w-full p-2 justify-center shadow gap-6 shadow-gray-500 rounded-md mb-9" do %>
+        <%= image_tag "github-mark.png", alt: "google-logo", class: "h-6"%>
+        <span class="font-bold text-xl">Sign In With GitHub </span>
+      <% end %>
+  <div class="border-t-2 border-gray-400 flex justify-center">
+    <%= button_to "Create Account", new_user_registration_path, method: :get, class: "mt-4 bg-[#69B82E] font-bold text-2xl text-white rounded-md p-4 mt-6"%>
+  </div>
+  </div>
 </div>
