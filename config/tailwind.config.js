@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ['Oxygen', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        'dark-sky-blue': "#1877F2"
+      }
     },
   },
   plugins: [
