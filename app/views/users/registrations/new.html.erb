@@ -1,39 +1,44 @@
-<h2>Sign up</h2>
+<div class="flex h-full">
+  <div class="flex flex-col items-center justify-center flex-1 ">
+    <h2 class="self-start ml-32 text-4xl font-extrabold text-dark-sky-blue mb-3">Sign up</h2>
+    <div class="flex flex-col  p-10 w-3/4 h-3/4 rounded-lg">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+          <div class="w-full flex gap-4">
+            <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "First Name", class: "w-2/4 rounded-md border-gray-300 p-4 mb-4"%>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name"%>
+            <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Last Name", class: "w-2/4 rounded-md border-gray-300 p-4 mb-4" %>
+          </div>
+
+          <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "w-full rounded-md border-gray-300 p-4 mb-4"  %>
+
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "w-full rounded-md border-gray-300 p-4 mb-4" %>
+
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Re-Password", class: "w-full rounded-md border-gray-300 p-4 mb-4" %>
+
+          <%= f.submit "Sign up", class: "w-full bg-dark-sky-blue font-bold text-2xl text-white rounded-md p-2 mb-4 cursor-pointer" %>
+      <% end %>
+        <div class="border-t-2 border-gray-400 flex justify-center mb-4">
+        </div>
+              <%= button_to user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, class: "flex items-center w-full p-2 justify-center shadow gap-6 shadow-gray-500 rounded-md mb-4" do %>
+        <%= image_tag "google-logo.png", alt: "google-logo", class: "h-6"%>
+        <span class="font-bold text-xl">Continue With Google </span>
+      <% end %>
+
+      <%= button_to user_github_omniauth_authorize_path, data: { turbo: false }, class: "flex items-center w-full p-2 justify-center shadow gap-6 shadow-gray-500 rounded-md mb-9" do %>
+        <%= image_tag "github-mark.png", alt: "google-logo", class: "h-6"%>
+        <span class="font-bold text-xl">Continue With GitHub </span>
+      <% end %>
+      </div>
   </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autocomplete: "last_name" %>
+  <div class="flex flex-1 items-center justify-center bg-gradient-to-r from-sky-200 to-sky-700">
+    <div class='flex items-center justify-center bg-app-logo bg-cover h-3/4 w-3/4 rounded-lg'>
+      <div class="bg-[#F8F9FF] bg-opacity-25 w-3/4 h-2/5 rounded-lg flex items-center justify-center p-2">
+        <p class="text-3xl font-bold text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, possimus.</p>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+<%# render "users/shared/links" %>
