@@ -8,11 +8,11 @@ RSpec.describe "Sign Up", type: :feature do
     it "redirects to home page" do
       visit "/users/sign_up"
 
-      fill_in "First name", with: user.first_name
-      fill_in "Last name", with: user.last_name
-      fill_in "Email", with: user.email
-      fill_in "Password", with: user.password
-      fill_in "Password confirmation", with: user.password
+      fill_in "user_first_name", with: user.first_name
+      fill_in "user_last_name", with: user.last_name
+      fill_in "user_email", with: user.email
+      fill_in "user_password", with: user.password
+      fill_in "user_password_confirmation", with: user.password
 
       click_button 'Sign up'
 
@@ -24,11 +24,11 @@ RSpec.describe "Sign Up", type: :feature do
     it "shows an error message" do
       visit "/users/sign_up"
 
-      fill_in "First name", with: user.first_name
-      fill_in "Last name", with: user.last_name
-      fill_in "Email", with: ""
-      fill_in "Password", with: ""
-      fill_in "Password confirmation", with: ""
+      fill_in "user_first_name", with: user.first_name
+      fill_in "user_last_name", with: user.last_name
+      fill_in "user_email", with: ""
+      fill_in "user_password", with: ""
+      fill_in "user_password_confirmation", with: ""
 
       click_button "Sign up"
 
