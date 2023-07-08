@@ -14,6 +14,9 @@ module.exports = {
       },
       colors: {
         'dark-sky-blue': "#1877F2"
+      },
+      backgroundImage: {
+        'app-logo': "url('app_logo.png')"
       }
     },
   },
