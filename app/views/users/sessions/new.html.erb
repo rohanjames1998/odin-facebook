@@ -19,12 +19,12 @@
     <% end %>
       <%= button_to user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, class: "flex items-center w-full p-2 justify-center shadow gap-6 shadow-gray-500 rounded-md mb-4" do %>
         <%= image_tag "google-logo.png", alt: "google-logo", class: "h-6"%>
-        <span class="font-bold text-xl">Sign In With Google </span>
+        <span class="font-bold text-xl">Continue With Google </span>
       <% end %>
 
       <%= button_to user_github_omniauth_authorize_path, data: { turbo: false }, class: "flex items-center w-full p-2 justify-center shadow gap-6 shadow-gray-500 rounded-md mb-9" do %>
         <%= image_tag "github-mark.png", alt: "google-logo", class: "h-6"%>
-        <span class="font-bold text-xl">Sign In With GitHub </span>
+        <span class="font-bold text-xl">Continue With GitHub </span>
       <% end %>
   <div class="border-t-2 border-gray-400 flex justify-center">
     <%= button_to "Create Account", new_user_registration_path, method: :get, class: "mt-4 bg-[#69B82E] font-bold text-2xl text-white rounded-md p-4 mt-6"%>
