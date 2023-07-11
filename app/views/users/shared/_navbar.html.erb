@@ -1,12 +1,14 @@
 <div class=" h-16 shadow-lg flex items-center justify-between p-2">
   <%= image_tag "app_logo", class:"h-12"%>
   <div class="flex", data-controller="navbar">
-    <%= button_to user_home_path(current_user), data: {turbo_frame: "content"}, method: :get do %>
+    <%= button_to user_home_path(user_id: current_user.id), data: {turbo_frame: "content"}, method: :get do %>
       <%= icon('fa-solid', 'house', class: "text-3xl pt-3 px-10 pb-4 ", data: { navbar_target: "icon", action: "click->navbar#highlight" })%>
     <% end%>
     <%= button_to users_path, data: {turbo_frame: "content"}, method: :get do %>
       <%= icon('fa-solid', 'users', class: "text-3xl pt-3 px-10 pb-4", data: { navbar_target: "icon", action: "click->navbar#highlight"} )%>
     <% end %>
   </div>
-  <%= image_tag url_for(current_user.profile.cover.picture), class: "h-11 rounded-full"%>
+  <% if current_user.profile.present? %>
+    <%= image_tag url_for(current_user.profile.avatar.picture), class: "h-11 rounded-full w-11"%>
+  <% end %>
 </div>
