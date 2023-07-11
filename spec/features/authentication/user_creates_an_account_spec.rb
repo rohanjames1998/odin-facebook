@@ -2,7 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "Sign Up", type: :feature do
 
-    let(:user)  { FactoryBot.build(:user) }
+    let(:user)  { FactoryBot.build(:user, :with_profile) }
+
+    before do
+      allow(user).to receive(:profile)
+      allow(user.profile).to receive(:avatar)
+      allow(user.profile.avatar).to receive(:picture)
+    end
 
   context "When signing up with valid credentials" do
     it "redirects to home page" do

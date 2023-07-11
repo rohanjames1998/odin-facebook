@@ -108,5 +108,6 @@ Capybara.register_driver :selenium_chrome_headless do |app|
     options: options
   )
 end
+RSpec::Mocks.configuration.allow_message_expectations_on_nil = true
 
 

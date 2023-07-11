@@ -65,4 +65,5 @@ Rails.application.configure do
   # config.action_view.annotate_rendered_view_with_filenames = true
 
   config.active_storage.variant_processor = :mini_magick
+  config.assets.css_compressor = nil
 end
