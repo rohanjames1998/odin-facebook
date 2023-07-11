@@ -75,8 +75,8 @@ class User < ApplicationRecord
     # building and attaching avatar and cover.
     profile.build_avatar(uploader_id: user.id, sub_type: "profile_avatar")
     profile.build_cover(uploader_id: user.id, sub_type: "profile_cover")
-    profile.avatar.picture.attach(io: File.open(cover_loc), filename: "default_cover.jpg", content_type: "image/jpeg")
-    profile.cover.picture.attach(io: File.open(avatar_loc), filename: "#{self.id}_default_avatar.png", content_type: "image/png")
+    profile.avatar.picture.attach(io: File.open(cover_loc), filename: "#{self.id}_default_avatar.png", content_type: "image/jpeg")
+    profile.cover.picture.attach(io: File.open(avatar_loc), filename: "default_cover.jpg", content_type: "image/png")
     user.profile.save!
   end
 
