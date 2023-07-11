@@ -1,24 +1,27 @@
-<main>
+<main class="h-full">
   <%= turbo_frame_tag "content" do %>
-  <h1>Home</h1>
-  <%= link_to "Find Friends", users_path %>
-  <%= link_to "My Friends", user_friends_path %>
+  <%# link_to "Find Friends", users_path %>
+  <%# link_to "My Friends", user_friends_path %>
+    <div class="flex h-full">
+      <section class="bg-slate-300 w-3/4">
+        <div data-controller="dialogs" >
+          <%= button_tag "Create Post",
+              type: "button",
+              data: { action: "dialogs#openDialog" }%>
+          <%= render "posts/form" %>
+        </div>
+        <%= turbo_stream_from "home_#{current_user.id}" %>
+        <div id="posts">
+          <%= render "posts/relevant_posts" %>
+        </div>
+      </section>
 
-  <div>
-  <% if current_user.notifications.any? %>
-    <%= render "users/notifications" %>
+      <section class="bg-pink-300">
+        <% if current_user.notifications.any? %>
+          <%= render "users/notifications" %>
+        <% end %>
+      </section>
+    </div>
   <% end %>
-  </div>
 
-  <div data-controller="dialogs" >
-    <%= button_tag "Create Post",
-        type: "button",
-        data: { action: "dialogs#openDialog" }%>
-    <%= render "posts/form" %>
-  </div>
-  <%= turbo_stream_from "home_#{current_user.id}" %>
-  <div id="posts">
-    <%= render "posts/relevant_posts" %>
-  </div>
-  <% end %>
 </main>
