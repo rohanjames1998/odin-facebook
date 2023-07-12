@@ -3,7 +3,7 @@
   <%# link_to "Find Friends", users_path %>
   <%# link_to "My Friends", user_friends_path %>
     <div class="flex h-full">
-      <section class="bg-slate-300 w-3/4">
+      <section class="bg-slate-300 w-full">
         <div data-controller="dialogs" >
           <%= button_tag "Create Post",
               type: "button",
@@ -16,12 +16,9 @@
         </div>
       </section>
 
-      <section class="bg-pink-300">
-        <% if current_user.notifications.any? %>
-          <%= render "users/notifications" %>
-        <% end %>
-      </section>
-    </div>
+        <%# if current_user.notifications.any? %>
+          <%# render "users/notifications" %>
+        <%# end %>
   <% end %>
 
 </main>
