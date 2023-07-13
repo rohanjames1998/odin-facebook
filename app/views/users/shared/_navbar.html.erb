@@ -3,22 +3,22 @@
   <div class="flex", data-controller="navbar">
     <%= button_to user_home_path(user_id: current_user.id), data: {turbo_frame: "content"}, method: :get do %>
       <%= icon('fa-solid', 'house', class: "text-3xl pt-3 px-10 pb-4 ", data: { navbar_target: "icon", action: "click->navbar#highlight" })%>
-    <% end%>
-    <%= button_to users_path, data: {turbo_frame: "content"}, method: :get do %>
+    <% end %>
+    <%= button_to users_path, data: {turbo_frame: "content"}, method: :get, id: "find_friends_btn" do %>
       <%= icon('fa-solid', 'users', class: "text-3xl pt-3 px-10 pb-4", data: { navbar_target: "icon", action: "click->navbar#highlight"} )%>
     <% end %>
   </div>
-  <% if current_user.profile.present? %>
     <div class="flex gap-5 relative" data-controller="notifications" data-notifications-target="parentDiv">
-      <%= button_tag class: "bg-gray-200 w-11 h-11 rounded-full", type: "button", data: {action: "notifications#openNotifications"} do %>
+      <%= button_tag class: "bg-gray-200 w-11 h-11 rounded-full", id: "notification_btn", type: "button", data: {action: "notifications#openNotifications"} do %>
         <%= icon('fa-solid','bell', class:"text-xl") %>
       <% end %>
       <template data-notifications-target = "notificationTemplate">
         <div class="h-[35rem] w-80 top-3/4 mt-3 bottom-1 right-2 bg-pink-200 absolute" data-notifications-target="notificationBox">
-          <%= render "users/notifications" %>
+          <%= render "users/notifications_box" %>
         </div>
       </template>
-      <%= image_tag url_for(current_user.profile.avatar.picture), class: "h-11 rounded-full w-11"%>
+      <% if current_user.profile.present? %>
+        <%= image_tag url_for(current_user.profile.avatar.picture), class: "h-11 rounded-full w-11"%>
+      <% end %>
     </div>
-  <% end %>
 </nav>
