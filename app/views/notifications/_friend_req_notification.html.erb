@@ -1,0 +1,31 @@
+<% if notification.notifiable.status == "pending" %>
+  <div class="flex flex-col">
+    <div class="flex gap-2">
+      <% if notification.sender.profile.present? %>
+        <%= image_tag url_for(notification.sender.profile.avatar.picture) %>
+      <% else %>
+        <div class="bg-gray-300 h-12 w-12 flex-none rounded-full flex items-center justify-center " >
+          <%= icon('fa-solid', 'user', class: "text-xl")%>
+        </div>
+      <% end %>
+      <p>Friend Request From <strong><%= notification.sender.name %></strong></p>
+    </div>
+    <div class="flex items-center justify-center gap-6">
+      <%= button_to "Accept", friendship_path({ id: notification.notifiable_id, status: "accepted", sender_id: current_user.id, receiver_id: notification.sender.id}), method: :patch, class: "px-5 py-3 rounded-md bg-green-300 ml-5" %>
+      <%= button_to "Decline", cancel_request_path( requested_user_id: current_user.id, request_sender_id: notification.sender_id ), method: :delete, class: "px-5 py-3 rounded-md bg-gray-200" %>
+    </div>
+  </div>
+<% else %>
+  <%= button_to users_path type: "button" do %>
+    <div class="flex gap-2">
+      <% if notification.sender.profile.present? %>
+        <%= image_tag url_for(notification.sender.profile.avatar.picture) %>
+      <% else %>
+        <div class="bg-gray-300 h-12 w-12 flex-none  rounded-full flex items-center justify-center " >
+          <%= icon('fa-solid', 'user', class: "text-xl")%>
+        </div>
+      <% end %>
+    <p class="text-left"><strong><%= notification.sender.name %></strong> has accepted your friend request! </p>
+    </div>
+    <% end %>
+<% end %>

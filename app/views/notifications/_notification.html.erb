@@ -1,0 +1,7 @@
+  <% case notification.notifiable_type %>
+  <% when "Friendship" %>
+    <%= render partial: "notifications/friend_req_notification", locals: {notification: notification }%>
+  <% when "Like" %>
+  <%# TODO Add a link to post %>
+    <p><%= notification.sender.name %> has liked your post. </p>
+  <% end %>
