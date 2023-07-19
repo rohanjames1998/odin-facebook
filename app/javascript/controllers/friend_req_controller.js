@@ -6,7 +6,7 @@ export default class extends Controller {
 
 
   hideNotification() {
-    this.disableBtns();
+    setTimeout(() => {this.disableBtns()}, 500);
     this.parentDivTarget.classList.add("invisible");
   }
 
