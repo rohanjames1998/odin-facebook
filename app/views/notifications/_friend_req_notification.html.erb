@@ -17,10 +17,10 @@
     </div>
   </div>
 <% else %>
-  <%= button_to users_path type: "button" do %>
+  <%= button_to user_friends_path, type: "button", method: :get do %>
     <div class="flex gap-2">
       <% if notification.sender.profile.present? %>
-        <%= image_tag url_for(notification.sender.profile.avatar.picture) %>
+        <%= image_tag url_for(notification.sender.profile.avatar.picture), class: "h-12 w-12 rounded-full" %>
       <% else %>
         <div class="bg-gray-300 h-12 w-12 flex-none  rounded-full flex items-center justify-center " >
           <%= icon('fa-solid', 'user', class: "text-xl")%>
