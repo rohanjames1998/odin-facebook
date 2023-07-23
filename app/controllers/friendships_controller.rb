@@ -1,8 +1,8 @@
 class FriendshipsController < ApplicationController
 
   def create
-    return if already_friends? # In case a user disables JS this will prevent duplicate
-    # records of friendships.
+    # In case a user disables JS this will prevent duplicate records of friendships.
+    return if already_friends?(params[:requested_user_id], params[:request_sender_id])
     @friendship = Friendship.create(friendship_params)
     @friendship.notifications.build
     @friendship.save
