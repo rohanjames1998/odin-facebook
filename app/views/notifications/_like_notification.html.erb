@@ -1,0 +1,27 @@
+<% if notification.notifiable.likeable_type == "Post" %>
+  <%= button_to post_path(notification.notifiable.likeable_id), type: "button", method: :get do%>
+    <div class="flex gap-2">
+      <% if notification.sender.profile.present? %>
+        <%= image_tag url_for(notification.sender.profile.avatar.picture), class: "h-12 w-12 flex-none rounded-full" %>
+      <% else %>
+        <div class="bg-gray-300 h-12 w-12 flex-none rounded-full flex items-center justify-center " >
+          <%= icon('fa-solid', 'user', class: "text-xl")%>
+        </div>
+      <% end %>
+      <p><strong><%=notification.sender.name%></strong> has liked your post!</p>
+    </div>
+  <% end %>
+<% elsif notification.notifiable.likeable_type == "Comment" %>
+  <%= button_to post_path(notification.notifiable.likeable.post), type: "button", method: :get do %>
+    <div class="flex gap-2">
+      <% if notification.sender.profile.present? %>
+        <%= image_tag url_for(notification.sender.profile.avatar.picture), class: "h-12 w-12 flex-none rounded-full" %>
+      <% else %>
+        <div class="bg-gray-300 h-12 w-12 flex-none rounded-full flex items-center justify-center " >
+          <%= icon('fa-solid', 'user', class: "text-xl")%>
+        </div>
+      <% end %>
+      <p><strong><%=notification.sender.name%></strong> has liked your comment!</p>
+    </div>
+  <% end %>
+<% end %>
