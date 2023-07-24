@@ -1,13 +1,7 @@
 <% if notification.notifiable.status == "pending" %>
   <div class="flex flex-col" data-controller="friend-req" data-friend-req-target="parentDiv">
     <div class="flex gap-2">
-      <% if notification.sender.profile.present? %>
-        <%= image_tag url_for(notification.sender.profile.avatar.picture), class: "h-12 w-12 flex-none rounded-full" %>
-      <% else %>
-        <div class="bg-gray-300 h-12 w-12 flex-none rounded-full flex items-center justify-center " >
-          <%= icon('fa-solid', 'user', class: "text-xl")%>
-        </div>
-      <% end %>
+      <%= render partial: "notifications/shared/user_avatar", locals: {user: notification.sender} %>
       <p>Friend Request From <strong><%= notification.sender.name %></strong></p>
     </div>
     <div class="flex items-center justify-center gap-6">
@@ -19,13 +13,7 @@
 <% else %>
   <%= button_to user_friends_path, type: "button", method: :get do %>
     <div class="flex gap-2">
-      <% if notification.sender.profile.present? %>
-        <%= image_tag url_for(notification.sender.profile.avatar.picture), class: "h-12 w-12 rounded-full" %>
-      <% else %>
-        <div class="bg-gray-300 h-12 w-12 flex-none  rounded-full flex items-center justify-center " >
-          <%= icon('fa-solid', 'user', class: "text-xl")%>
-        </div>
-      <% end %>
+    <%= render partial: "notifications/shared/user_avatar", locals: {user: notification.sender} %>
     <p class="text-left"><strong><%= notification.sender.name %></strong> has accepted your friend request! </p>
     </div>
     <% end %>

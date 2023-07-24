@@ -2,5 +2,7 @@
   <% when "Friendship" %>
     <%= render partial: "notifications/friend_req_notification", locals: {notification: notification }%>
   <% when "Like" %>
-    <%= render partial: "notifications/like_notification", locals: {notification: notification} %>
+    <%= render partial: "notifications/like_notification", locals: {notification: notification } %>
+  <% when "Comment" %>
+    <%= render partial: "notifications/comment_notification", locals: { comment: notification.notifiable, notification: notification } %>
   <% end %>
