@@ -20,4 +20,21 @@ RSpec.describe Comment, type: :model do
   describe "validations" do
     it { should validate_presence_of(:text) }
   end
+
+  describe "#is_a_reply?" do
+    context "when comment is a reply" do
+      it "returns true" do
+        comment = FactoryBot.create(:comment, :reply)
+        output = comment.is_a_reply?
+        expect(output).to be true
+      end
+    end
+    context "when comment is not a reply" do
+      it "returns false" do
+        comment = FactoryBot.create(:comment)
+        output = comment.is_a_reply?
+        expect(output).to be false
+      end
+    end
+  end
 end

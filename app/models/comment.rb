@@ -12,4 +12,12 @@ class Comment < ApplicationRecord
   validates_associated :text
 
   accepts_nested_attributes_for :text
+
+  def is_a_reply?
+    if parent_comment_id != nil
+      true
+    else
+      false
+    end
+  end
 end
