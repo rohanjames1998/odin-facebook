@@ -1,0 +1,11 @@
+<%= button_to post_path(comment.post_id), type: "button", method: :get do %>
+  <div class="flex gap-2">
+    <%= render partial: "notifications/shared/user_avatar", locals: { user:comment.author }%>
+    <% if comment.is_a_reply? %>
+      <p class="text-left"><strong><%=notification.sender.name%></strong> replied to your comment.</p>
+    <% else %>
+      <p class="text-left"><strong><%=notification.sender.name%></strong> commented on your post.</p>
+    <% end %>
+  </div>
+<% end %>
+
