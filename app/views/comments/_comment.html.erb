@@ -2,6 +2,47 @@
   <div>
     <%= comment.text.content %>
   </div>
+      <div data-controller="likes button-changer">
+    <% if post.likes.any? %>
+      <p data-likes-target="likeCounter"><%= pluralize(comment.likes.count, "Like") %></p>
+    <% else %>
+      <p data-likes-target="likeCounter"></p>
+    <% end %>
+    <% if already_liked?("Comment", comment.id) %>
+      <%= button_to "Like", likes_path( like: { likeable_type: "Comment",
+                                                likeable_id: comment.id,
+                                                notification_attributes: { receiver_id: comment.post.author.id }}),
+                                        data:{ action: "likes#increaseCount
+                                                        button-changer#changeBtn",
+                                               likes_target: "likeBtn",
+                                               button_changer_target: "btn"
+      }, class: "hidden", disabled: true, method: :post %>
+      <%= button_to "Unlike", remove_like_path(likeable_type: "Comment",
+                                               likeable_id: comment.id), data: {
+        action: "likes#decreaseCount button-changer#changeBtn",
+        button_changer_target: "btn",
+        likes_target: "likeBtn"},
+        method: :delete
+        %>
+    <% else %>
+        <%= button_to "Like", likes_path( like: { likeable_type: "Comment",
+                                                  likeable_id: comment.id,
+                                                  notification_attributes: { receiver_id: comment.post.author.id }}),
+                                          data:{action: "likes#increaseCount
+                                                         button-changer#changeBtn",
+                                                likes_target: "likeBtn",
+                                                button_changer_target: "btn"},
+                                                method: :post %>
+         <%= button_to "Unlike", remove_like_path(likeable_type: "Comment",
+                                                  likeable_id: comment.id),
+                                  data: { action: "likes#decreaseCount
+                                                   button-changer#changeBtn",
+                                        button_changer_target: "btn",
+                                        likes_target: "likeBtn" },
+                                        class: "hidden", disabled: true,
+                                        method: :delete %>
+    <% end %>
+    </div>
   <% if comment.replies.present? %>
     <% comment.replies.includes(:text).each_with_index do |reply, index|%>
       <%# Index is for visually indenting each reply as done below (see class)%>
