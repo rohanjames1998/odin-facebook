@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment.build_text(content: params[:comment][:text][:content], author_id: current_user.id)
      if @comment.save
       stream_comment(@comment, params, post)
-      send_notification(@comment, params[:comment][:parent_comment_id])
+      send_notification(params[:comment][:parent_comment_id], @comment.post.author_id, current_user.id, @comment)
      else
       # Flash notifications with error.
      end
@@ -37,7 +37,8 @@ class CommentsController < ApplicationController
        end
     end
 
-    def send_notification(comment, parent_id)
+    def send_notification(parent_id, receiver_id, sender_id, comment)
+      return if receiver_id == sender_id #No notification if OP comments on the post/comment
       if parent_id == nil
         comment.notifications.create(receiver_id: comment.post.author_id, sender_id: current_user.id)
       else

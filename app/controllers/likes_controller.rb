@@ -6,8 +6,7 @@ class LikesController < ApplicationController
       # show up this will prevent duplicate likes.
       head :forbidden
     else
-      like.build_notification(receiver_id: params[:like][:notification_attributes][:receiver_id],
-                              sender_id: current_user.id)
+      send_notification(params[:like][:notification_attributes][:receiver_id], current_user.id, like)
       like.save
       helpers.add_likes_to_associated_models(like.likeable_type, like.likeable_id)
       head :no_content
@@ -24,5 +23,10 @@ class LikesController < ApplicationController
   private
   def like_params
     params.require(:like).permit(:likeable_type, :likeable_id, notification_attributes: [:receiver_id])
+  end
+
+  def send_notification(sender_id, receiver_id, like)
+    return if sender_id == receiver_id # No notification if OP likes their post/comment
+    like.build_notification(receiver_id: receiver_id, sender_id: sender_id)
   end
 end
